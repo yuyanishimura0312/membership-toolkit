@@ -7,27 +7,43 @@
 <link rel="icon" href="https://esse-sense.com/favicon.ico">
 <style>
 :root {
-  --bg: #faf9f7;
+  /* Miratuku CI Colors */
+  --bg: #faf8f5;
   --card: #ffffff;
   --text: #1a1a1a;
   --text-muted: #6b6b6b;
-  --accent: #8b4513;
-  --accent-soft: #d4a574;
-  --accent-bg: #f5ede4;
-  --accent-light: #faf3ec;
+  --accent: #783c28;
+  --accent-soft: #CEA26F;
+  --accent-bg: #f8efe6;
+  --accent-light: #faf5f0;
   --border: #e8e4df;
   --shadow: 0 1px 3px rgba(0,0,0,0.06);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
   --radius: 10px;
   --max-width: 1100px;
-  --tier1: #2e7d32; --tier1-bg: #e8f5e9;
-  --tier2: #1565c0; --tier2-bg: #e3f2fd;
-  --tier3: #c62828; --tier3-bg: #fce4ec;
-  --cat-community: #6d4c41; --cat-foresight: #0277bd; --cat-dialogue: #00695c;
-  --cat-commons: #4527a0; --cat-engagement: #bf360c;
+  /* Tier colors from CI palette */
+  --tier1: #B07256; --tier1-bg: #faf5f0;
+  --tier2: #7A4033; --tier2-bg: #f8efe6;
+  --tier3: #966D5E; --tier3-bg: #f5ebe4;
+  /* Category colors from CI 12-color palette */
+  --cat-community: #7A4033; --cat-foresight: #B07256; --cat-dialogue: #DC8766;
+  --cat-commons: #966D5E; --cat-engagement: #CEA26F;
+  /* CI named colors for reference */
+  --ci-golden-orange: #F0A671;
+  --ci-light-beige: #F2C792;
+  --ci-warm-beige: #F1C189;
+  --ci-camel: #CEA26F;
+  --ci-pale-peach: #F8CDAC;
+  --ci-sand-gold: #F0BE83;
+  --ci-soft-salmon: #EFC4A4;
+  --ci-rose-peach: #F7BEA2;
+  --ci-terracotta: #DC8766;
+  --ci-amber-brown: #B07256;
+  --ci-warm-brown: #966D5E;
+  --ci-deep-brown: #7A4033;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',-apple-system,sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; font-size: 15px; }
+body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,'Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; font-size: 15px; }
 
 /* === Header === */
 .header { background: var(--card); border-bottom: 1px solid var(--border); padding: .75rem 2rem; position: sticky; top: 0; z-index: 100; }
@@ -219,34 +235,34 @@ body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',-apple-system,san
         <!-- Background -->
         <rect x="0" y="0" width="400" height="320" fill="none"/>
         <!-- Center circle -->
-        <circle cx="200" cy="160" r="45" fill="#f5ede4" stroke="#8b4513" stroke-width="2"/>
-        <text x="200" y="155" text-anchor="middle" font-size="10" font-weight="700" fill="#8b4513">認識的</text>
-        <text x="200" y="168" text-anchor="middle" font-size="10" font-weight="700" fill="#8b4513">共同体</text>
+        <circle cx="200" cy="160" r="45" fill="#f8efe6" stroke="#7A4033" stroke-width="2"/>
+        <text x="200" y="155" text-anchor="middle" font-size="10" font-weight="700" fill="#7A4033">認識的</text>
+        <text x="200" y="168" text-anchor="middle" font-size="10" font-weight="700" fill="#7A4033">共同体</text>
         <!-- Category nodes -->
-        <circle cx="200" cy="40" r="32" fill="#efebe9" stroke="#6d4c41" stroke-width="2"/>
-        <text x="200" y="37" text-anchor="middle" font-size="9" font-weight="600" fill="#6d4c41">共同体</text>
-        <text x="200" y="48" text-anchor="middle" font-size="9" font-weight="600" fill="#6d4c41">構築</text>
-        <line x1="200" y1="72" x2="200" y2="115" stroke="#6d4c41" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="200" cy="40" r="32" fill="#faf5f0" stroke="#7A4033" stroke-width="2"/>
+        <text x="200" y="37" text-anchor="middle" font-size="9" font-weight="600" fill="#7A4033">共同体</text>
+        <text x="200" y="48" text-anchor="middle" font-size="9" font-weight="600" fill="#7A4033">構築</text>
+        <line x1="200" y1="72" x2="200" y2="115" stroke="#7A4033" stroke-width="1.5" stroke-dasharray="4,3"/>
 
-        <circle cx="352" cy="100" r="32" fill="#e1f5fe" stroke="#0277bd" stroke-width="2"/>
-        <text x="352" y="95" text-anchor="middle" font-size="8" font-weight="600" fill="#0277bd">フォーサイト</text>
-        <text x="352" y="107" text-anchor="middle" font-size="8" font-weight="600" fill="#0277bd">シグナル</text>
-        <line x1="325" y1="120" x2="242" y2="145" stroke="#0277bd" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="352" cy="100" r="32" fill="#faf5f0" stroke="#B07256" stroke-width="2"/>
+        <text x="352" y="95" text-anchor="middle" font-size="8" font-weight="600" fill="#B07256">フォーサイト</text>
+        <text x="352" y="107" text-anchor="middle" font-size="8" font-weight="600" fill="#B07256">シグナル</text>
+        <line x1="325" y1="120" x2="242" y2="145" stroke="#B07256" stroke-width="1.5" stroke-dasharray="4,3"/>
 
-        <circle cx="320" cy="260" r="32" fill="#e0f2f1" stroke="#00695c" stroke-width="2"/>
-        <text x="320" y="255" text-anchor="middle" font-size="8" font-weight="600" fill="#00695c">対話</text>
-        <text x="320" y="267" text-anchor="middle" font-size="8" font-weight="600" fill="#00695c">ファシリテーション</text>
-        <line x1="295" y1="242" x2="235" y2="192" stroke="#00695c" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="320" cy="260" r="32" fill="#faf5f0" stroke="#DC8766" stroke-width="2"/>
+        <text x="320" y="255" text-anchor="middle" font-size="8" font-weight="600" fill="#DC8766">対話</text>
+        <text x="320" y="267" text-anchor="middle" font-size="8" font-weight="600" fill="#DC8766">ファシリテーション</text>
+        <line x1="295" y1="242" x2="235" y2="192" stroke="#DC8766" stroke-width="1.5" stroke-dasharray="4,3"/>
 
-        <circle cx="80" cy="260" r="32" fill="#ede7f6" stroke="#4527a0" stroke-width="2"/>
-        <text x="80" y="255" text-anchor="middle" font-size="9" font-weight="600" fill="#4527a0">知識</text>
-        <text x="80" y="267" text-anchor="middle" font-size="9" font-weight="600" fill="#4527a0">コモンズ</text>
-        <line x1="105" y1="240" x2="168" y2="190" stroke="#4527a0" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="80" cy="260" r="32" fill="#f5ebe4" stroke="#966D5E" stroke-width="2"/>
+        <text x="80" y="255" text-anchor="middle" font-size="9" font-weight="600" fill="#966D5E">知識</text>
+        <text x="80" y="267" text-anchor="middle" font-size="9" font-weight="600" fill="#966D5E">コモンズ</text>
+        <line x1="105" y1="240" x2="168" y2="190" stroke="#966D5E" stroke-width="1.5" stroke-dasharray="4,3"/>
 
-        <circle cx="48" cy="100" r="32" fill="#fbe9e7" stroke="#bf360c" stroke-width="2"/>
-        <text x="48" y="93" text-anchor="middle" font-size="8" font-weight="600" fill="#bf360c">エンゲージ</text>
-        <text x="48" y="105" text-anchor="middle" font-size="8" font-weight="600" fill="#bf360c">メント</text>
-        <line x1="75" y1="118" x2="158" y2="148" stroke="#bf360c" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="48" cy="100" r="32" fill="#f8efe6" stroke="#CEA26F" stroke-width="2"/>
+        <text x="48" y="93" text-anchor="middle" font-size="8" font-weight="600" fill="#CEA26F">エンゲージ</text>
+        <text x="48" y="105" text-anchor="middle" font-size="8" font-weight="600" fill="#CEA26F">メント</text>
+        <line x1="75" y1="118" x2="158" y2="148" stroke="#CEA26F" stroke-width="1.5" stroke-dasharray="4,3"/>
       </svg>
       <div class="diagram-caption">5カテゴリの関係図 -- すべてが「認識的共同体」を中心に連動する</div>
     </div>
@@ -266,17 +282,17 @@ body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',-apple-system,san
         <!-- Concentric circles diagram -->
         <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
           <!-- Outer ring -->
-          <circle cx="180" cy="180" r="160" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
-          <text x="180" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d32">Sensing Members</text>
-          <text x="180" y="52" text-anchor="middle" font-size="9" fill="#2e7d32">まなざしの共有者</text>
+          <circle cx="180" cy="180" r="160" fill="#faf5f0" stroke="#B07256" stroke-width="2"/>
+          <text x="180" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#B07256">Sensing Members</text>
+          <text x="180" y="52" text-anchor="middle" font-size="9" fill="#B07256">まなざしの共有者</text>
           <!-- Middle ring -->
-          <circle cx="180" cy="180" r="110" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
-          <text x="180" y="88" text-anchor="middle" font-size="11" font-weight="700" fill="#1565c0">Inquiry Fellows</text>
-          <text x="180" y="102" text-anchor="middle" font-size="9" fill="#1565c0">問いの共創者</text>
+          <circle cx="180" cy="180" r="110" fill="#f8efe6" stroke="#7A4033" stroke-width="2"/>
+          <text x="180" y="88" text-anchor="middle" font-size="11" font-weight="700" fill="#7A4033">Inquiry Fellows</text>
+          <text x="180" y="102" text-anchor="middle" font-size="9" fill="#7A4033">問いの共創者</text>
           <!-- Inner ring -->
-          <circle cx="180" cy="180" r="60" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
-          <text x="180" y="172" text-anchor="middle" font-size="10" font-weight="700" fill="#c62828">Stewards</text>
-          <text x="180" y="186" text-anchor="middle" font-size="9" fill="#c62828">場の守り手</text>
+          <circle cx="180" cy="180" r="60" fill="#f5ebe4" stroke="#966D5E" stroke-width="2"/>
+          <text x="180" y="172" text-anchor="middle" font-size="10" font-weight="700" fill="#966D5E">Stewards</text>
+          <text x="180" y="186" text-anchor="middle" font-size="9" fill="#966D5E">場の守り手</text>
           <!-- Arrow: outer to inner -->
           <path d="M180 320 L180 340 L175 335 M180 340 L185 335" stroke="#6b6b6b" stroke-width="1" fill="none"/>
           <text x="200" y="348" font-size="8" fill="#6b6b6b">参加の深化</text>
@@ -309,8 +325,8 @@ body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',-apple-system,san
     <p>メンバーシップは4つの季節のリズムで運営されます。各季節に適したツールキットを配置します</p>
   </div>
   <div class="season-grid">
-    <div class="season-card" style="border-top-color: #43a047;">
-      <h4 style="color: #43a047;">春（4-6月）種蒔き</h4>
+    <div class="season-card" style="border-top-color: #F0A671;">
+      <h4 style="color: #B07256;">春（4-6月）種蒔き</h4>
       <ul>
         <li>年度テーマ設定（OST + 全メンバー投票）</li>
         <li>新コホート受入れ・オンボーディング</li>
@@ -318,8 +334,8 @@ body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',-apple-system,san
         <li>適用ツール: OST, 25/10 Crowd Sourcing, コホートモデル, 参加ラダー</li>
       </ul>
     </div>
-    <div class="season-card" style="border-top-color: #ef6c00;">
-      <h4 style="color: #ef6c00;">夏（7-9月）第1探究</h4>
+    <div class="season-card" style="border-top-color: #DC8766;">
+      <h4 style="color: #DC8766;">夏（7-9月）第1探究</h4>
       <ul>
         <li>5-8名チームの探究プロジェクト</li>
         <li>未来庵での夏合宿（2泊3日）</li>
@@ -327,8 +343,8 @@ body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',-apple-system,san
         <li>適用ツール: Three Horizons, CLA, Theory U, ボームダイアローグ</li>
       </ul>
     </div>
-    <div class="season-card" style="border-top-color: #d32f2f;">
-      <h4 style="color: #d32f2f;">秋（10-12月）第2探究+公開</h4>
+    <div class="season-card" style="border-top-color: #966D5E;">
+      <h4 style="color: #966D5E;">秋（10-12月）第2探究+公開</h4>
       <ul>
         <li>フォーラムでの成果発表</li>
         <li>外部へのオープンデー</li>
@@ -336,8 +352,8 @@ body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',-apple-system,san
         <li>適用ツール: バックキャスティング, プロアクションカフェ, フィッシュボウル</li>
       </ul>
     </div>
-    <div class="season-card" style="border-top-color: #1565c0;">
-      <h4 style="color: #1565c0;">冬（1-3月）収穫と省察</h4>
+    <div class="season-card" style="border-top-color: #7A4033;">
+      <h4 style="color: #7A4033;">冬（1-3月）収穫と省察</h4>
       <ul>
         <li>年間レポート共同編纂</li>
         <li>Warm Data Labによる省察</li>
@@ -352,37 +368,37 @@ body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',-apple-system,san
       <line x1="30" y1="60" x2="670" y2="60" stroke="#e8e4df" stroke-width="3"/>
       <polygon points="670,55 680,60 670,65" fill="#e8e4df"/>
       <!-- Season markers -->
-      <circle cx="100" cy="60" r="18" fill="#e8f5e9" stroke="#43a047" stroke-width="2"/>
-      <text x="100" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#43a047">春</text>
+      <circle cx="100" cy="60" r="18" fill="#faf5f0" stroke="#F0A671" stroke-width="2"/>
+      <text x="100" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#B07256">春</text>
       <text x="100" y="95" text-anchor="middle" font-size="8" fill="#6b6b6b">種蒔き</text>
 
-      <circle cx="260" cy="60" r="18" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
-      <text x="260" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#ef6c00">夏</text>
+      <circle cx="260" cy="60" r="18" fill="#f8efe6" stroke="#DC8766" stroke-width="2"/>
+      <text x="260" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#DC8766">夏</text>
       <text x="260" y="95" text-anchor="middle" font-size="8" fill="#6b6b6b">第1探究+合宿</text>
 
-      <circle cx="420" cy="60" r="18" fill="#ffebee" stroke="#d32f2f" stroke-width="2"/>
-      <text x="420" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#d32f2f">秋</text>
+      <circle cx="420" cy="60" r="18" fill="#f5ebe4" stroke="#966D5E" stroke-width="2"/>
+      <text x="420" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#966D5E">秋</text>
       <text x="420" y="95" text-anchor="middle" font-size="8" fill="#6b6b6b">第2探究+公開</text>
 
-      <circle cx="580" cy="60" r="18" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
-      <text x="580" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#1565c0">冬</text>
+      <circle cx="580" cy="60" r="18" fill="#f8efe6" stroke="#7A4033" stroke-width="2"/>
+      <text x="580" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#7A4033">冬</text>
       <text x="580" y="95" text-anchor="middle" font-size="8" fill="#6b6b6b">収穫と省察</text>
 
       <!-- Connecting lines -->
-      <line x1="118" y1="60" x2="242" y2="60" stroke="#d4a574" stroke-width="2"/>
-      <line x1="278" y1="60" x2="402" y2="60" stroke="#d4a574" stroke-width="2"/>
-      <line x1="438" y1="60" x2="562" y2="60" stroke="#d4a574" stroke-width="2"/>
+      <line x1="118" y1="60" x2="242" y2="60" stroke="#CEA26F" stroke-width="2"/>
+      <line x1="278" y1="60" x2="402" y2="60" stroke="#CEA26F" stroke-width="2"/>
+      <line x1="438" y1="60" x2="562" y2="60" stroke="#CEA26F" stroke-width="2"/>
 
       <!-- Phase labels top -->
-      <text x="180" y="30" text-anchor="middle" font-size="7" fill="#8b4513">テーマ設定</text>
-      <text x="340" y="30" text-anchor="middle" font-size="7" fill="#8b4513">探究サイクル</text>
-      <text x="500" y="30" text-anchor="middle" font-size="7" fill="#8b4513">成果共有</text>
-      <text x="640" y="30" text-anchor="middle" font-size="7" fill="#8b4513">振り返り</text>
+      <text x="180" y="30" text-anchor="middle" font-size="7" fill="#7A4033">テーマ設定</text>
+      <text x="340" y="30" text-anchor="middle" font-size="7" fill="#7A4033">探究サイクル</text>
+      <text x="500" y="30" text-anchor="middle" font-size="7" fill="#7A4033">成果共有</text>
+      <text x="640" y="30" text-anchor="middle" font-size="7" fill="#7A4033">振り返り</text>
 
       <!-- Return arrow -->
-      <path d="M620 45 Q650 15 680 15 Q700 15 700 30 L700 100 Q700 115 680 115 L80 115 Q60 115 60 100 L60 78" stroke="#d4a574" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
-      <polygon points="57,80 60,70 63,80" fill="#d4a574"/>
-      <text x="380" y="112" text-anchor="middle" font-size="7" fill="#8b4513">次年度サイクルへ</text>
+      <path d="M620 45 Q650 15 680 15 Q700 15 700 30 L700 100 Q700 115 680 115 L80 115 Q60 115 60 100 L60 78" stroke="#CEA26F" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
+      <polygon points="57,80 60,70 63,80" fill="#CEA26F"/>
+      <text x="380" y="112" text-anchor="middle" font-size="7" fill="#7A4033">次年度サイクルへ</text>
     </svg>
     <div class="diagram-caption">年間サイクル -- 春の種蒔きから冬の収穫まで、探究が循環する</div>
   </div>
