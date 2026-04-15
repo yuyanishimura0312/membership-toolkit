@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>認識的共同体メンバーシップ ツールキット | NPO法人ミラツク</title>
+<title>認識的共同体メンバーシップ 実践ツールキット | NPO法人ミラツク</title>
 <link rel="icon" href="https://esse-sense.com/favicon.ico">
 <style>
 :root {
@@ -14,444 +14,458 @@
   --accent: #8b4513;
   --accent-soft: #d4a574;
   --accent-bg: #f5ede4;
+  --accent-light: #faf3ec;
   --border: #e8e4df;
   --shadow: 0 1px 3px rgba(0,0,0,0.06);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --radius: 8px;
-  --max-width: 1200px;
+  --radius: 10px;
+  --max-width: 1100px;
+  --tier1: #2e7d32; --tier1-bg: #e8f5e9;
+  --tier2: #1565c0; --tier2-bg: #e3f2fd;
+  --tier3: #c62828; --tier3-bg: #fce4ec;
+  --cat-community: #6d4c41; --cat-foresight: #0277bd; --cat-dialogue: #00695c;
+  --cat-commons: #4527a0; --cat-engagement: #bf360c;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Hiragino Kaku Gothic ProN','Noto Sans JP',-apple-system,sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; font-size: 15px; }
 
-body {
-  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', -apple-system, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.8;
-  font-size: 15px;
-}
-
-/* Header */
-.header {
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.header-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.header-brand {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-}
+/* === Header === */
+.header { background: var(--card); border-bottom: 1px solid var(--border); padding: .75rem 2rem; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: var(--max-width); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.header-brand { font-size: .85rem; font-weight: 700; letter-spacing: .08em; color: var(--accent); }
 .header-brand span { color: var(--text-muted); font-weight: 400; }
-.header-nav { display: flex; gap: 1.5rem; }
-.header-nav a {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
+.header-nav { display: flex; gap: 1.2rem; }
+.header-nav a { font-size: .78rem; color: var(--text-muted); text-decoration: none; transition: color .2s; }
 .header-nav a:hover { color: var(--accent); }
 
-/* Hero */
-.hero {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 4rem 2rem 3rem;
-}
-.hero-subtitle {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-.hero h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1.3;
-  margin-bottom: 1rem;
-}
-.hero-desc {
-  font-size: 1rem;
-  color: var(--text-muted);
-  max-width: 720px;
-  line-height: 1.9;
-}
+/* === Section layout === */
+.section { max-width: var(--max-width); margin: 0 auto; padding: 3rem 2rem; }
+.section + .section { padding-top: 0; }
+.section-alt { background: var(--accent-light); padding: 3rem 0; }
+.section-alt .section-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
 
-/* Category nav */
-.cat-nav {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 2rem 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.cat-btn {
-  padding: 0.5rem 1.2rem;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  background: var(--card);
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.cat-btn:hover, .cat-btn.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-.cat-count {
-  display: inline-block;
-  background: var(--accent-bg);
-  color: var(--accent);
-  font-size: 0.7rem;
-  padding: 1px 6px;
-  border-radius: 100px;
-  margin-left: 4px;
-}
-.cat-btn.active .cat-count {
-  background: rgba(255,255,255,0.3);
-  color: #fff;
-}
+/* === Hero === */
+.hero { max-width: var(--max-width); margin: 0 auto; padding: 3.5rem 2rem 2rem; }
+.hero-label { font-size: .72rem; font-weight: 600; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .5rem; }
+.hero h1 { font-size: 1.8rem; font-weight: 800; line-height: 1.35; margin-bottom: 1rem; }
+.hero-lead { font-size: .95rem; color: var(--text-muted); max-width: 700px; line-height: 1.9; }
 
-/* Stats bar */
-.stats-bar {
-  max-width: var(--max-width);
-  margin: 0 auto 2rem;
-  padding: 0 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-.stat-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem 1.2rem;
-}
-.stat-card .label { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.25rem; }
-.stat-card .value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+/* === Guide intro === */
+.guide-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 2rem; }
+.guide-text { font-size: .88rem; line-height: 1.9; }
+.guide-text h3 { font-size: 1rem; font-weight: 700; margin-bottom: .5rem; color: var(--accent); }
+.guide-text p { margin-bottom: .75rem; color: var(--text-muted); }
 
-/* Main content */
-.main {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
+/* === Diagram containers === */
+.diagram-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; }
+.diagram-box svg { max-width: 100%; height: auto; }
+.diagram-caption { font-size: .72rem; color: var(--text-muted); margin-top: .5rem; }
 
-/* Section headers */
-.section-header {
-  margin: 3rem 0 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--accent);
-}
-.section-header h2 {
-  font-size: 1.3rem;
-  font-weight: 700;
-}
-.section-header p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-top: 0.25rem;
-}
+/* === How to use === */
+.how-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 2rem 0; }
+.how-step { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; transition: box-shadow .2s; }
+.how-step:hover { box-shadow: var(--shadow-md); }
+.how-step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: .8rem; font-weight: 700; margin-bottom: .75rem; }
+.how-step h4 { font-size: .88rem; font-weight: 700; margin-bottom: .4rem; }
+.how-step p { font-size: .78rem; color: var(--text-muted); line-height: 1.6; }
 
-/* Toolkit cards */
-.toolkit-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 1.2rem;
-}
-.toolkit-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.toolkit-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--accent-soft);
-}
-.toolkit-card.expanded {
-  grid-column: 1 / -1;
-}
-.tk-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-.tk-number {
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.tk-title {
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-.tk-origin {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-.tk-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-  line-height: 1.7;
-}
-.tk-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-bottom: 0.75rem;
-}
-.tk-tag {
-  background: var(--accent-bg);
-  color: var(--accent);
-  font-size: 0.68rem;
-  padding: 2px 8px;
-  border-radius: 3px;
-}
-.tk-detail {
-  display: none;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-}
-.toolkit-card.expanded .tk-detail { display: block; }
-.tk-detail h4 {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin: 1rem 0 0.5rem;
-}
-.tk-detail h4:first-child { margin-top: 0; }
-.tk-detail p, .tk-detail li {
-  font-size: 0.85rem;
-  line-height: 1.8;
-  color: var(--text);
-}
-.tk-detail ol, .tk-detail ul {
-  padding-left: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-.tk-detail li { margin-bottom: 0.3rem; }
-.tk-ref {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  font-style: italic;
-  margin-top: 0.75rem;
-}
-.tk-tier {
-  display: inline-block;
-  font-size: 0.68rem;
-  padding: 2px 8px;
-  border-radius: 3px;
-  font-weight: 600;
-}
-.tier-1 { background: #e8f5e9; color: #2e7d32; }
-.tier-2 { background: #e3f2fd; color: #1565c0; }
-.tier-3 { background: #fce4ec; color: #c62828; }
+/* === Section headings === */
+.sh { margin-bottom: 1.5rem; }
+.sh h2 { font-size: 1.3rem; font-weight: 700; }
+.sh p { font-size: .85rem; color: var(--text-muted); margin-top: .25rem; }
+.sh-line { width: 40px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: .5rem; }
+
+/* === Tier diagram === */
+.tier-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 2rem; align-items: start; }
+.tier-details { display: flex; flex-direction: column; gap: 1rem; }
+.tier-card { border-radius: var(--radius); padding: 1rem 1.2rem; border-left: 4px solid; }
+.tier-card h4 { font-size: .88rem; font-weight: 700; margin-bottom: .25rem; }
+.tier-card p { font-size: .78rem; color: var(--text-muted); line-height: 1.6; }
+.tier-1-card { background: var(--tier1-bg); border-color: var(--tier1); }
+.tier-1-card h4 { color: var(--tier1); }
+.tier-2-card { background: var(--tier2-bg); border-color: var(--tier2); }
+.tier-2-card h4 { color: var(--tier2); }
+.tier-3-card { background: var(--tier3-bg); border-color: var(--tier3); }
+.tier-3-card h4 { color: var(--tier3); }
+
+/* === Seasonal rhythm === */
+.season-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
+.season-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem; border-top: 3px solid var(--accent); }
+.season-card h4 { font-size: .85rem; font-weight: 700; margin-bottom: .5rem; }
+.season-card ul { list-style: none; font-size: .78rem; color: var(--text-muted); }
+.season-card li { padding: .15rem 0; padding-left: 1rem; position: relative; }
+.season-card li::before { content: ''; position: absolute; left: 0; top: .55rem; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-soft); }
+
+/* === Category legend === */
+.cat-legend { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.5rem 0; }
+.cat-pill { display: flex; align-items: center; gap: .4rem; padding: .4rem 1rem; border-radius: 100px; font-size: .78rem; font-weight: 600; cursor: pointer; border: 2px solid transparent; transition: all .2s; background: var(--card); }
+.cat-pill.active { border-color: currentColor; }
+.cat-pill .dot { width: 10px; height: 10px; border-radius: 50%; }
+.cat-community .dot { background: var(--cat-community); } .cat-community { color: var(--cat-community); }
+.cat-foresight .dot { background: var(--cat-foresight); } .cat-foresight { color: var(--cat-foresight); }
+.cat-dialogue .dot { background: var(--cat-dialogue); } .cat-dialogue { color: var(--cat-dialogue); }
+.cat-commons .dot { background: var(--cat-commons); } .cat-commons { color: var(--cat-commons); }
+.cat-engagement .dot { background: var(--cat-engagement); } .cat-engagement { color: var(--cat-engagement); }
+.cat-all { color: var(--text); }
+
+/* === Search & filter bar === */
+.filter-bar { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; }
+.filter-bar input { flex: 1; min-width: 200px; padding: .6rem 1rem; border: 1px solid var(--border); border-radius: var(--radius); font-size: .82rem; background: var(--card); }
+.filter-bar input:focus { outline: none; border-color: var(--accent); }
+.filter-bar select { padding: .6rem .8rem; border: 1px solid var(--border); border-radius: var(--radius); font-size: .82rem; background: var(--card); }
+
+/* === Toolkit cards === */
+.tk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1rem; }
+.tk-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.4rem; cursor: pointer; transition: all .2s; border-left: 4px solid var(--border); }
+.tk-card:hover { box-shadow: var(--shadow-md); }
+.tk-card.expanded { grid-column: 1 / -1; border-left-color: var(--accent); }
+.tk-card[data-cat="community"] { border-left-color: var(--cat-community); }
+.tk-card[data-cat="foresight"] { border-left-color: var(--cat-foresight); }
+.tk-card[data-cat="dialogue"] { border-left-color: var(--cat-dialogue); }
+.tk-card[data-cat="commons"] { border-left-color: var(--cat-commons); }
+.tk-card[data-cat="engagement"] { border-left-color: var(--cat-engagement); }
+.tk-head { display: flex; gap: .6rem; align-items: flex-start; margin-bottom: .5rem; }
+.tk-num { width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff; font-size: .68rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.tk-title { font-size: .92rem; font-weight: 700; line-height: 1.4; }
+.tk-origin { font-size: .72rem; color: var(--text-muted); }
+.tk-desc { font-size: .82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: .5rem; }
+.tk-meta { display: flex; flex-wrap: wrap; gap: 4px; }
+.tk-tag { background: var(--accent-bg); color: var(--accent); font-size: .65rem; padding: 2px 7px; border-radius: 3px; }
+.tk-tier { font-size: .65rem; padding: 2px 7px; border-radius: 3px; font-weight: 600; }
 .tier-all { background: var(--accent-bg); color: var(--accent); }
+.tier-1 { background: var(--tier1-bg); color: var(--tier1); }
+.tier-2 { background: var(--tier2-bg); color: var(--tier2); }
+.tier-3 { background: var(--tier3-bg); color: var(--tier3); }
+.tk-detail { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.tk-card.expanded .tk-detail { display: block; }
+.tk-detail h4 { font-size: .78rem; font-weight: 700; color: var(--accent); margin: .75rem 0 .4rem; }
+.tk-detail h4:first-child { margin-top: 0; }
+.tk-detail p, .tk-detail li { font-size: .82rem; line-height: 1.8; }
+.tk-detail ol, .tk-detail ul { padding-left: 1.2rem; margin-bottom: .4rem; }
+.tk-detail li { margin-bottom: .2rem; }
+.tk-ref { font-size: .72rem; color: var(--text-muted); font-style: italic; margin-top: .5rem; }
+.tk-toggle { font-size: .72rem; color: var(--accent); text-align: right; margin-top: .4rem; }
 
-/* Expand/collapse indicator */
-.tk-toggle {
-  font-size: 0.75rem;
-  color: var(--accent);
-  text-align: right;
-  margin-top: 0.5rem;
-}
+/* === Stats row === */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
+.stat { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: .8rem 1rem; text-align: center; }
+.stat .num { font-size: 1.6rem; font-weight: 800; color: var(--accent); }
+.stat .lbl { font-size: .7rem; color: var(--text-muted); }
 
-/* Footer */
-.footer {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 2rem;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
+/* === Phase flow === */
+.phase-flow { display: flex; gap: 0; margin: 1.5rem 0; overflow-x: auto; }
+.phase-step { flex: 1; min-width: 100px; padding: .75rem .5rem; text-align: center; background: var(--card); border: 1px solid var(--border); cursor: pointer; transition: all .2s; position: relative; }
+.phase-step:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.phase-step:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+.phase-step.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.phase-step .ph-label { font-size: .62rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; opacity: .7; }
+.phase-step .ph-name { font-size: .75rem; font-weight: 600; }
 
-/* Responsive */
+/* === Footer === */
+.footer { max-width: var(--max-width); margin: 0 auto; padding: 2rem; border-top: 1px solid var(--border); text-align: center; font-size: .72rem; color: var(--text-muted); }
+
+/* === Responsive === */
 @media (max-width: 768px) {
-  .hero h1 { font-size: 1.5rem; }
-  .toolkit-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.4rem; }
+  .guide-intro, .tier-grid { grid-template-columns: 1fr; }
+  .how-steps { grid-template-columns: 1fr; }
+  .season-grid { grid-template-columns: 1fr 1fr; }
+  .tk-grid { grid-template-columns: 1fr; }
   .header-nav { display: none; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .phase-flow { flex-wrap: wrap; }
+  .phase-step { min-width: 80px; }
 }
-
-/* Search */
-.search-box {
-  max-width: var(--max-width);
-  margin: 0 auto 1.5rem;
-  padding: 0 2rem;
-}
-.search-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font-size: 0.85rem;
-  background: var(--card);
-  color: var(--text);
-}
-.search-input:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-/* Phase indicator */
-.phase-bar {
-  max-width: var(--max-width);
-  margin: 2rem auto;
-  padding: 0 2rem;
-}
-.phase-timeline {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-}
-.phase-item {
-  flex: 1;
-  min-width: 120px;
-  padding: 0.75rem 1rem;
-  background: var(--card);
-  border: 1px solid var(--border);
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-}
-.phase-item:first-child { border-radius: var(--radius) 0 0 var(--radius); }
-.phase-item:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
-.phase-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  right: -8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  border-left: 8px solid var(--border);
-  z-index: 1;
-}
-.phase-item.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-.phase-item .phase-label { font-size: 0.7rem; font-weight: 700; }
-.phase-item .phase-name { font-size: 0.75rem; margin-top: 2px; }
 </style>
 </head>
 <body>
 
+<!-- ==================== HEADER ==================== -->
 <div class="header">
   <div class="header-inner">
-    <div class="header-brand">MIRA TUKU <span>MEMBERSHIP TOOLKIT</span></div>
+    <div class="header-brand">MIRA TUKU <span>TOOLKIT</span></div>
     <nav class="header-nav">
       <a href="#overview">概要</a>
-      <a href="#community">共同体構築</a>
-      <a href="#foresight">フォーサイト</a>
-      <a href="#dialogue">対話手法</a>
-      <a href="#commons">知識コモンズ</a>
-      <a href="#engagement">エンゲージメント</a>
+      <a href="#structure">三層構造</a>
+      <a href="#rhythm">年間リズム</a>
+      <a href="#howto">使い方</a>
+      <a href="#toolkits">ツールキット一覧</a>
     </nav>
   </div>
 </div>
 
+<!-- ==================== HERO ==================== -->
 <div class="hero" id="overview">
-  <div class="hero-subtitle">Epistemic Community Membership Toolkit</div>
+  <div class="hero-label">Epistemic Community Membership Toolkit</div>
   <h1>認識的共同体メンバーシップ<br>実践ツールキット</h1>
-  <p class="hero-desc">
-    ホワイトペーパー「知識運動体のためのメンバーシップ」で提案した認識的共同体モデルを具体化するための手法・フレームワーク・ツールを集約した実践ガイドです。各ツールキットは、メンバーシップの三層構造（Sensing Members / Inquiry Fellows / Stewards）のどの層で、いつ、どのように活用するかを明示しています。
+  <p class="hero-lead">
+    ホワイトペーパー「知識運動体のためのメンバーシップ」で提案した認識的共同体モデルを実践するための手法・フレームワーク45種を集約したガイドです。
   </p>
 </div>
 
-<!-- Phase timeline -->
-<div class="phase-bar">
-  <div class="phase-timeline">
-    <div class="phase-item active" onclick="filterPhase('all')">
-      <div class="phase-label">ALL</div>
-      <div class="phase-name">全フェーズ</div>
+<!-- ==================== GUIDE INTRO with diagram ==================== -->
+<div class="section">
+  <div class="guide-intro">
+    <div class="guide-text">
+      <h3>このツールキットの目的</h3>
+      <p>ミラツクが構築する「認識的共同体（Epistemic Community）」メンバーシップは、消費ではなく探究、交換ではなく贈与、構造ではなく創発を設計原理としています。</p>
+      <p>本ツールキットは、この理念を具体的な活動に落とし込むための手法集です。各ツールキットには「どの層で」「いつ」「どう使うか」を明示しています。</p>
+      <h3>5つのカテゴリ</h3>
+      <p>45のツールキットは、メンバーシップ運営の5つの領域に分類されています。右の図は各カテゴリがどの活動フェーズに対応するかを示しています。</p>
     </div>
-    <div class="phase-item" onclick="filterPhase('onboarding')">
-      <div class="phase-label">PHASE 1</div>
-      <div class="phase-name">参加・導入</div>
-    </div>
-    <div class="phase-item" onclick="filterPhase('inquiry')">
-      <div class="phase-label">PHASE 2</div>
-      <div class="phase-name">探究サイクル</div>
-    </div>
-    <div class="phase-item" onclick="filterPhase('deepening')">
-      <div class="phase-label">PHASE 3</div>
-      <div class="phase-name">深化・合宿</div>
-    </div>
-    <div class="phase-item" onclick="filterPhase('governance')">
-      <div class="phase-label">PHASE 4</div>
-      <div class="phase-name">自治・運営</div>
-    </div>
-    <div class="phase-item" onclick="filterPhase('harvest')">
-      <div class="phase-label">PHASE 5</div>
-      <div class="phase-name">収穫・統合</div>
+    <div class="diagram-box">
+      <!-- Category-Phase relationship diagram -->
+      <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <rect x="0" y="0" width="400" height="320" fill="none"/>
+        <!-- Center circle -->
+        <circle cx="200" cy="160" r="45" fill="#f5ede4" stroke="#8b4513" stroke-width="2"/>
+        <text x="200" y="155" text-anchor="middle" font-size="10" font-weight="700" fill="#8b4513">認識的</text>
+        <text x="200" y="168" text-anchor="middle" font-size="10" font-weight="700" fill="#8b4513">共同体</text>
+        <!-- Category nodes -->
+        <circle cx="200" cy="40" r="32" fill="#efebe9" stroke="#6d4c41" stroke-width="2"/>
+        <text x="200" y="37" text-anchor="middle" font-size="9" font-weight="600" fill="#6d4c41">共同体</text>
+        <text x="200" y="48" text-anchor="middle" font-size="9" font-weight="600" fill="#6d4c41">構築</text>
+        <line x1="200" y1="72" x2="200" y2="115" stroke="#6d4c41" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+        <circle cx="352" cy="100" r="32" fill="#e1f5fe" stroke="#0277bd" stroke-width="2"/>
+        <text x="352" y="95" text-anchor="middle" font-size="8" font-weight="600" fill="#0277bd">フォーサイト</text>
+        <text x="352" y="107" text-anchor="middle" font-size="8" font-weight="600" fill="#0277bd">シグナル</text>
+        <line x1="325" y1="120" x2="242" y2="145" stroke="#0277bd" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+        <circle cx="320" cy="260" r="32" fill="#e0f2f1" stroke="#00695c" stroke-width="2"/>
+        <text x="320" y="255" text-anchor="middle" font-size="8" font-weight="600" fill="#00695c">対話</text>
+        <text x="320" y="267" text-anchor="middle" font-size="8" font-weight="600" fill="#00695c">ファシリテーション</text>
+        <line x1="295" y1="242" x2="235" y2="192" stroke="#00695c" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+        <circle cx="80" cy="260" r="32" fill="#ede7f6" stroke="#4527a0" stroke-width="2"/>
+        <text x="80" y="255" text-anchor="middle" font-size="9" font-weight="600" fill="#4527a0">知識</text>
+        <text x="80" y="267" text-anchor="middle" font-size="9" font-weight="600" fill="#4527a0">コモンズ</text>
+        <line x1="105" y1="240" x2="168" y2="190" stroke="#4527a0" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+        <circle cx="48" cy="100" r="32" fill="#fbe9e7" stroke="#bf360c" stroke-width="2"/>
+        <text x="48" y="93" text-anchor="middle" font-size="8" font-weight="600" fill="#bf360c">エンゲージ</text>
+        <text x="48" y="105" text-anchor="middle" font-size="8" font-weight="600" fill="#bf360c">メント</text>
+        <line x1="75" y1="118" x2="158" y2="148" stroke="#bf360c" stroke-width="1.5" stroke-dasharray="4,3"/>
+      </svg>
+      <div class="diagram-caption">5カテゴリの関係図 -- すべてが「認識的共同体」を中心に連動する</div>
     </div>
   </div>
 </div>
 
-<!-- Stats -->
-<div class="stats-bar">
-  <div class="stat-card"><div class="label">ツールキット総数</div><div class="value" id="statTotal">0</div></div>
-  <div class="stat-card"><div class="label">カテゴリ</div><div class="value" id="statCats">6</div></div>
-  <div class="stat-card"><div class="label">学術的根拠あり</div><div class="value" id="statAcademic">0</div></div>
-  <div class="stat-card"><div class="label">対象層</div><div class="value">3層</div></div>
+<!-- ==================== THREE-TIER STRUCTURE ==================== -->
+<div class="section-alt" id="structure">
+  <div class="section-inner">
+    <div class="sh">
+      <div class="sh-line"></div>
+      <h2>三層同心円構造</h2>
+      <p>メンバーシップは3つの層で構成され、各層に適したツールキットが異なります</p>
+    </div>
+    <div class="tier-grid">
+      <div class="diagram-box">
+        <!-- Concentric circles diagram -->
+        <svg viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer ring -->
+          <circle cx="180" cy="180" r="160" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+          <text x="180" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#2e7d32">Sensing Members</text>
+          <text x="180" y="52" text-anchor="middle" font-size="9" fill="#2e7d32">まなざしの共有者</text>
+          <!-- Middle ring -->
+          <circle cx="180" cy="180" r="110" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+          <text x="180" y="88" text-anchor="middle" font-size="11" font-weight="700" fill="#1565c0">Inquiry Fellows</text>
+          <text x="180" y="102" text-anchor="middle" font-size="9" fill="#1565c0">問いの共創者</text>
+          <!-- Inner ring -->
+          <circle cx="180" cy="180" r="60" fill="#fce4ec" stroke="#c62828" stroke-width="2"/>
+          <text x="180" y="172" text-anchor="middle" font-size="10" font-weight="700" fill="#c62828">Stewards</text>
+          <text x="180" y="186" text-anchor="middle" font-size="9" fill="#c62828">場の守り手</text>
+          <!-- Arrow: outer to inner -->
+          <path d="M180 320 L180 340 L175 335 M180 340 L185 335" stroke="#6b6b6b" stroke-width="1" fill="none"/>
+          <text x="200" y="348" font-size="8" fill="#6b6b6b">参加の深化</text>
+        </svg>
+        <div class="diagram-caption">三層同心円 -- 周辺から中心へ参加が深化する（Wengerの正統的周辺参加）</div>
+      </div>
+      <div class="tier-details">
+        <div class="tier-card tier-1-card">
+          <h4>第一圏: Sensing Members（感知する人々）</h4>
+          <p>シグナルの交換と観察から始まる「最初の贈与」。月額1,500円、人数制限なし。主なツール: シグナルカード、ワールドカフェ、1-2-4-All、参加ラダー</p>
+        </div>
+        <div class="tier-card tier-2-card">
+          <h4>第二圏: Inquiry Fellows（探究フェロー）</h4>
+          <p>四半期の探究サイクルで共に問いを立てる。月額5,000円、最大200名。主なツール: Three Horizons、CLA、Action Learning Set、Theory U、YPOフォーラム</p>
+        </div>
+        <div class="tier-card tier-3-card">
+          <h4>第三圏: Stewards（場の守り手）</h4>
+          <p>知識コモンズの共同設計と自治。法人30,000-50,000円。主なツール: Ostromチェックリスト、Loomio、Wind-Tunneling、SPACES Model</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Search -->
-<div class="search-box">
-  <input type="text" class="search-input" id="searchInput" placeholder="ツールキットを検索..." oninput="renderAll()">
+<!-- ==================== SEASONAL RHYTHM ==================== -->
+<div class="section" id="rhythm">
+  <div class="sh">
+    <div class="sh-line"></div>
+    <h2>年間リズム -- 季節ごとの探究サイクル</h2>
+    <p>メンバーシップは4つの季節のリズムで運営されます。各季節に適したツールキットを配置します</p>
+  </div>
+  <div class="season-grid">
+    <div class="season-card" style="border-top-color: #43a047;">
+      <h4 style="color: #43a047;">春（4-6月）種蒔き</h4>
+      <ul>
+        <li>年度テーマ設定（OST + 全メンバー投票）</li>
+        <li>新コホート受入れ・オンボーディング</li>
+        <li>シグナルスキャニング方向性決定</li>
+        <li>適用ツール: OST, 25/10 Crowd Sourcing, コホートモデル, 参加ラダー</li>
+      </ul>
+    </div>
+    <div class="season-card" style="border-top-color: #ef6c00;">
+      <h4 style="color: #ef6c00;">夏（7-9月）第1探究</h4>
+      <ul>
+        <li>5-8名チームの探究プロジェクト</li>
+        <li>未来庵での夏合宿（2泊3日）</li>
+        <li>中間成果の共有会</li>
+        <li>適用ツール: Three Horizons, CLA, Theory U, ボームダイアローグ</li>
+      </ul>
+    </div>
+    <div class="season-card" style="border-top-color: #d32f2f;">
+      <h4 style="color: #d32f2f;">秋（10-12月）第2探究+公開</h4>
+      <ul>
+        <li>フォーラムでの成果発表</li>
+        <li>外部へのオープンデー</li>
+        <li>メンバー更新告知</li>
+        <li>適用ツール: バックキャスティング, プロアクションカフェ, フィッシュボウル</li>
+      </ul>
+    </div>
+    <div class="season-card" style="border-top-color: #1565c0;">
+      <h4 style="color: #1565c0;">冬（1-3月）収穫と省察</h4>
+      <ul>
+        <li>年間レポート共同編纂</li>
+        <li>Warm Data Labによる省察</li>
+        <li>未来庵での冬合宿</li>
+        <li>適用ツール: AAR, Appreciative Inquiry, 感謝の壁, Value Creation</li>
+      </ul>
+    </div>
+  </div>
+  <div class="diagram-box" style="margin-top: 1rem;">
+    <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
+      <!-- Timeline arrow -->
+      <line x1="30" y1="60" x2="670" y2="60" stroke="#e8e4df" stroke-width="3"/>
+      <polygon points="670,55 680,60 670,65" fill="#e8e4df"/>
+      <!-- Season markers -->
+      <circle cx="100" cy="60" r="18" fill="#e8f5e9" stroke="#43a047" stroke-width="2"/>
+      <text x="100" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#43a047">春</text>
+      <text x="100" y="95" text-anchor="middle" font-size="8" fill="#6b6b6b">種蒔き</text>
+
+      <circle cx="260" cy="60" r="18" fill="#fff3e0" stroke="#ef6c00" stroke-width="2"/>
+      <text x="260" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#ef6c00">夏</text>
+      <text x="260" y="95" text-anchor="middle" font-size="8" fill="#6b6b6b">第1探究+合宿</text>
+
+      <circle cx="420" cy="60" r="18" fill="#ffebee" stroke="#d32f2f" stroke-width="2"/>
+      <text x="420" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#d32f2f">秋</text>
+      <text x="420" y="95" text-anchor="middle" font-size="8" fill="#6b6b6b">第2探究+公開</text>
+
+      <circle cx="580" cy="60" r="18" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+      <text x="580" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#1565c0">冬</text>
+      <text x="580" y="95" text-anchor="middle" font-size="8" fill="#6b6b6b">収穫と省察</text>
+
+      <!-- Connecting lines -->
+      <line x1="118" y1="60" x2="242" y2="60" stroke="#d4a574" stroke-width="2"/>
+      <line x1="278" y1="60" x2="402" y2="60" stroke="#d4a574" stroke-width="2"/>
+      <line x1="438" y1="60" x2="562" y2="60" stroke="#d4a574" stroke-width="2"/>
+
+      <!-- Phase labels top -->
+      <text x="180" y="30" text-anchor="middle" font-size="7" fill="#8b4513">テーマ設定</text>
+      <text x="340" y="30" text-anchor="middle" font-size="7" fill="#8b4513">探究サイクル</text>
+      <text x="500" y="30" text-anchor="middle" font-size="7" fill="#8b4513">成果共有</text>
+      <text x="640" y="30" text-anchor="middle" font-size="7" fill="#8b4513">振り返り</text>
+
+      <!-- Return arrow -->
+      <path d="M620 45 Q650 15 680 15 Q700 15 700 30 L700 100 Q700 115 680 115 L80 115 Q60 115 60 100 L60 78" stroke="#d4a574" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
+      <polygon points="57,80 60,70 63,80" fill="#d4a574"/>
+      <text x="380" y="112" text-anchor="middle" font-size="7" fill="#8b4513">次年度サイクルへ</text>
+    </svg>
+    <div class="diagram-caption">年間サイクル -- 春の種蒔きから冬の収穫まで、探究が循環する</div>
+  </div>
 </div>
 
-<!-- Category nav -->
-<div class="cat-nav" id="catNav"></div>
+<!-- ==================== HOW TO USE ==================== -->
+<div class="section-alt" id="howto">
+  <div class="section-inner">
+    <div class="sh">
+      <div class="sh-line"></div>
+      <h2>ツールキットの使い方</h2>
+      <p>3ステップでメンバーシップ活動に適切なツールを選択できます</p>
+    </div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <h4>フェーズを選ぶ</h4>
+        <p>今取り組んでいる活動フェーズ（参加・導入/探究/深化/自治/収穫）を選択すると、そのフェーズに適したツールキットが絞り込まれます。</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <h4>カテゴリで絞る</h4>
+        <p>5つのカテゴリ（共同体構築/フォーサイト/対話/知識コモンズ/エンゲージメント）から、目的に合ったカテゴリを選びます。</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <h4>詳細を確認</h4>
+        <p>カードをクリックすると実践手順、推奨人数・時間、ミラツクでの具体的な活用法、参考文献が表示されます。</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- Main content -->
-<div class="main" id="mainContent"></div>
+<!-- ==================== TOOLKIT CATALOG ==================== -->
+<div class="section" id="toolkits">
+  <div class="sh">
+    <div class="sh-line"></div>
+    <h2>ツールキット一覧</h2>
+    <p>45の手法・フレームワークをフィルタリング・検索して探索できます</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat"><div class="num" id="statTotal">0</div><div class="lbl">ツールキット総数</div></div>
+    <div class="stat"><div class="num">5</div><div class="lbl">カテゴリ</div></div>
+    <div class="stat"><div class="num" id="statAcademic">0</div><div class="lbl">学術的根拠あり</div></div>
+    <div class="stat"><div class="num">3層</div><div class="lbl">対象メンバーシップ層</div></div>
+  </div>
+
+  <!-- Phase filter -->
+  <div class="phase-flow">
+    <div class="phase-step active" onclick="filterPhase('all',this)"><div class="ph-label">ALL</div><div class="ph-name">全フェーズ</div></div>
+    <div class="phase-step" onclick="filterPhase('onboarding',this)"><div class="ph-label">Phase 1</div><div class="ph-name">参加・導入</div></div>
+    <div class="phase-step" onclick="filterPhase('inquiry',this)"><div class="ph-label">Phase 2</div><div class="ph-name">探究サイクル</div></div>
+    <div class="phase-step" onclick="filterPhase('deepening',this)"><div class="ph-label">Phase 3</div><div class="ph-name">深化・合宿</div></div>
+    <div class="phase-step" onclick="filterPhase('governance',this)"><div class="ph-label">Phase 4</div><div class="ph-name">自治・運営</div></div>
+    <div class="phase-step" onclick="filterPhase('harvest',this)"><div class="ph-label">Phase 5</div><div class="ph-name">収穫・統合</div></div>
+  </div>
+
+  <!-- Category + Search -->
+  <div class="cat-legend" id="catLegend"></div>
+  <div class="filter-bar">
+    <input type="text" id="searchInput" placeholder="ツールキットを検索..." oninput="renderAll()">
+    <select id="tierFilter" onchange="renderAll()">
+      <option value="">全ての層</option>
+      <option value="all">全層共通</option>
+      <option value="tier-1">Sensing Members</option>
+      <option value="tier-2">Inquiry Fellows</option>
+      <option value="tier-3">Stewards</option>
+    </select>
+  </div>
+
+  <!-- Cards -->
+  <div class="tk-grid" id="tkGrid"></div>
+</div>
 
 <div class="footer">
-  NPO法人ミラツク | 認識的共同体メンバーシップ ツールキット | 2026年4月
+  NPO法人ミラツク | 認識的共同体メンバーシップ 実践ツールキット | 2026年4月
 </div>
 
 <script>
 // ============================================================
-// TOOLKIT DATA
+// TOOLKIT DATA (preserved from research)
 // ============================================================
 const TOOLKITS = [
 
@@ -1667,139 +1681,91 @@ const CATEGORIES = {
   engagement: { label: 'エンゲージメント', desc: 'オンボーディング・運営・リズム・振り返りの手法' }
 };
 
-const TIER_LABELS = {
-  'all': '全層共通',
-  'tier-1': 'Sensing Members',
-  'tier-2': 'Inquiry Fellows',
-  'tier-3': 'Stewards'
+// ============================================================
+
+const CATEGORIES = {
+  community: { label: '共同体構築', color: 'var(--cat-community)' },
+  foresight: { label: 'フォーサイト・シグナル', color: 'var(--cat-foresight)' },
+  dialogue: { label: '対話・ファシリテーション', color: 'var(--cat-dialogue)' },
+  commons: { label: '知識コモンズ', color: 'var(--cat-commons)' },
+  engagement: { label: 'エンゲージメント', color: 'var(--cat-engagement)' }
 };
 
-// ============================================================
-// STATE
-// ============================================================
+const TIER_LABELS = { 'all':'全層共通', 'tier-1':'Sensing Members', 'tier-2':'Inquiry Fellows', 'tier-3':'Stewards' };
+
 let currentCat = 'all';
 let currentPhase = 'all';
 let expandedId = null;
 
-// ============================================================
-// RENDER
-// ============================================================
 function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
 function renderAll() {
   const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  const tierFilter = document.getElementById('tierFilter')?.value || '';
 
   let filtered = TOOLKITS.filter(tk => {
     if (currentCat !== 'all' && tk.cat !== currentCat) return false;
     if (currentPhase !== 'all' && !tk.phases.includes(currentPhase)) return false;
+    if (tierFilter && !tk.tiers.includes(tierFilter)) return false;
     if (search) {
-      const haystack = (tk.title + ' ' + tk.desc + ' ' + tk.tags.join(' ') + ' ' + tk.origin).toLowerCase();
-      if (!haystack.includes(search)) return false;
+      const h = (tk.title + ' ' + tk.desc + ' ' + tk.tags.join(' ') + ' ' + tk.origin).toLowerCase();
+      if (!h.includes(search)) return false;
     }
     return true;
   });
 
-  // Stats
   document.getElementById('statTotal').textContent = TOOLKITS.length;
   document.getElementById('statAcademic').textContent = TOOLKITS.filter(t => t.academic).length;
 
-  // Category nav
-  const catNav = document.getElementById('catNav');
-  let catHtml = `<button class="cat-btn ${currentCat === 'all' ? 'active' : ''}" onclick="filterCat('all')">すべて<span class="cat-count">${TOOLKITS.length}</span></button>`;
-  for (const [key, val] of Object.entries(CATEGORIES)) {
-    const count = TOOLKITS.filter(t => t.cat === key).length;
-    catHtml += `<button class="cat-btn ${currentCat === key ? 'active' : ''}" onclick="filterCat('${key}')">${val.label}<span class="cat-count">${count}</span></button>`;
+  // Category legend
+  const cl = document.getElementById('catLegend');
+  let clh = `<div class="cat-pill cat-all ${currentCat==='all'?'active':''}" onclick="filterCat('all')"><span class="dot" style="background:var(--text-muted)"></span> すべて (${TOOLKITS.length})</div>`;
+  for (const [k,v] of Object.entries(CATEGORIES)) {
+    const c = TOOLKITS.filter(t=>t.cat===k).length;
+    clh += `<div class="cat-pill cat-${k} ${currentCat===k?'active':''}" onclick="filterCat('${k}')"><span class="dot"></span> ${v.label} (${c})</div>`;
   }
-  catNav.innerHTML = catHtml;
+  cl.innerHTML = clh;
 
-  // Group by category
-  const main = document.getElementById('mainContent');
-  let html = '';
-
-  if (currentCat === 'all') {
-    for (const [key, val] of Object.entries(CATEGORIES)) {
-      const catItems = filtered.filter(t => t.cat === key);
-      if (catItems.length === 0) continue;
-      html += `<div class="section-header" id="${key}"><h2>${val.label}</h2><p>${val.desc}</p></div>`;
-      html += '<div class="toolkit-grid">';
-      catItems.forEach(tk => { html += renderCard(tk); });
-      html += '</div>';
-    }
-  } else {
-    const val = CATEGORIES[currentCat];
-    html += `<div class="section-header" id="${currentCat}"><h2>${val.label}</h2><p>${val.desc}</p></div>`;
-    html += '<div class="toolkit-grid">';
-    filtered.forEach(tk => { html += renderCard(tk); });
-    html += '</div>';
-  }
-
+  // Grid
+  const grid = document.getElementById('tkGrid');
   if (filtered.length === 0) {
-    html = '<div style="text-align:center;padding:4rem 2rem;color:var(--text-muted);">該当するツールキットがありません</div>';
+    grid.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--text-muted);grid-column:1/-1">該当するツールキットがありません</div>';
+    return;
   }
 
-  main.innerHTML = html;
+  grid.innerHTML = filtered.map(tk => {
+    const isExp = expandedId === tk.id;
+    const tierHtml = tk.tiers.map(t => `<span class="tk-tier ${t}">${TIER_LABELS[t]}</span>`).join(' ');
+    let detHtml = '';
+    if (tk.detail) {
+      detHtml = '<div class="tk-detail">';
+      if (tk.detail.howto) {
+        detHtml += '<h4>実践手順</h4>';
+        detHtml += tk.detail.howto.map(l => l===''?'<br>':l.startsWith('【')?`<p><strong>${esc(l)}</strong></p>`:`<p>${esc(l)}</p>`).join('');
+      }
+      if (tk.detail.application) detHtml += `<h4>ミラツクでの活用</h4><p>${esc(tk.detail.application)}</p>`;
+      if (tk.detail.ref) detHtml += `<div class="tk-ref">${esc(tk.detail.ref)}</div>`;
+      detHtml += '</div>';
+    }
+    return `<div class="tk-card ${isExp?'expanded':''}" data-cat="${tk.cat}" onclick="toggle('${tk.id}')">
+      <div class="tk-head"><div class="tk-num">${tk.num}</div><div><div class="tk-title">${esc(tk.title)}</div><div class="tk-origin">${esc(tk.origin)}</div></div></div>
+      <div class="tk-desc">${esc(tk.desc)}</div>
+      <div class="tk-meta">${tk.tags.map(t=>`<span class="tk-tag">${esc(t)}</span>`).join('')}${tierHtml}</div>
+      ${detHtml}
+      <div class="tk-toggle">${isExp?'閉じる':'詳細を見る'}</div>
+    </div>`;
+  }).join('');
 }
 
-function renderCard(tk) {
-  const isExpanded = expandedId === tk.id;
-  const tierHtml = tk.tiers.map(t => `<span class="tk-tier ${t}">${TIER_LABELS[t]}</span>`).join(' ');
-
-  let detailHtml = '';
-  if (tk.detail) {
-    detailHtml = '<div class="tk-detail">';
-    if (tk.detail.howto) {
-      detailHtml += '<h4>実践手順</h4>';
-      detailHtml += tk.detail.howto.map(line => {
-        if (line === '') return '<br>';
-        if (line.startsWith('【')) return `<p><strong>${esc(line)}</strong></p>`;
-        return `<p>${esc(line)}</p>`;
-      }).join('');
-    }
-    if (tk.detail.application) {
-      detailHtml += `<h4>ミラツクでの活用</h4><p>${esc(tk.detail.application)}</p>`;
-    }
-    if (tk.detail.ref) {
-      detailHtml += `<div class="tk-ref">${esc(tk.detail.ref)}</div>`;
-    }
-    detailHtml += '</div>';
-  }
-
-  return `<div class="toolkit-card ${isExpanded ? 'expanded' : ''}" onclick="toggleCard('${tk.id}')">
-    <div class="tk-header">
-      <div class="tk-number">${tk.num}</div>
-      <div>
-        <div class="tk-title">${esc(tk.title)}</div>
-        <div class="tk-origin">${esc(tk.origin)}</div>
-      </div>
-    </div>
-    <div class="tk-desc">${esc(tk.desc)}</div>
-    <div class="tk-tags">
-      ${tk.tags.map(t => `<span class="tk-tag">${esc(t)}</span>`).join('')}
-      ${tierHtml}
-    </div>
-    ${detailHtml}
-    <div class="tk-toggle">${isExpanded ? '閉じる' : '詳細を見る'}</div>
-  </div>`;
-}
-
-function toggleCard(id) {
-  expandedId = expandedId === id ? null : id;
+function toggle(id) { expandedId = expandedId===id?null:id; renderAll(); }
+function filterCat(c) { currentCat = c; renderAll(); }
+function filterPhase(p, el) {
+  currentPhase = p;
+  document.querySelectorAll('.phase-step').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');
   renderAll();
 }
 
-function filterCat(cat) {
-  currentCat = cat;
-  renderAll();
-}
-
-function filterPhase(phase) {
-  currentPhase = phase;
-  document.querySelectorAll('.phase-item').forEach(el => el.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-  renderAll();
-}
-
-// Initial render
 renderAll();
 </script>
 </body>
