@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>認識的共同体メンバーシップ ツールキット | NPO法人ミラツク</title>
+<link rel="icon" href="https://esse-sense.com/favicon.ico">
+<style>
+:root {
+  --bg: #faf9f7;
+  --card: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #6b6b6b;
+  --accent: #8b4513;
+  --accent-soft: #d4a574;
+  --accent-bg: #f5ede4;
+  --border: #e8e4df;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --radius: 8px;
+  --max-width: 1200px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+/* Header */
+.header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-brand {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+.header-brand span { color: var(--text-muted); font-weight: 400; }
+.header-nav { display: flex; gap: 1.5rem; }
+.header-nav a {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.header-nav a:hover { color: var(--accent); }
+
+/* Hero */
+.hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem 2rem 3rem;
+}
+.hero-subtitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.hero h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+.hero-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 720px;
+  line-height: 1.9;
+}
+
+/* Category nav */
+.cat-nav {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.cat-btn {
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--card);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cat-btn:hover, .cat-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.cat-count {
+  display: inline-block;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  border-radius: 100px;
+  margin-left: 4px;
+}
+.cat-btn.active .cat-count {
+  background: rgba(255,255,255,0.3);
+  color: #fff;
+}
+
+/* Stats bar */
+.stats-bar {
+  max-width: var(--max-width);
+  margin: 0 auto 2rem;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+}
+.stat-card .label { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+.stat-card .value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+
+/* Main content */
+.main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+/* Section headers */
+.section-header {
+  margin: 3rem 0 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--accent);
+}
+.section-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.section-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* Toolkit cards */
+.toolkit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.2rem;
+}
+.toolkit-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.toolkit-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-soft);
+}
+.toolkit-card.expanded {
+  grid-column: 1 / -1;
+}
+.tk-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.tk-number {
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tk-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.tk-origin {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.tk-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+.tk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 0.75rem;
+}
+.tk-tag {
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.tk-detail {
+  display: none;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.toolkit-card.expanded .tk-detail { display: block; }
+.tk-detail h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 1rem 0 0.5rem;
+}
+.tk-detail h4:first-child { margin-top: 0; }
+.tk-detail p, .tk-detail li {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+.tk-detail ol, .tk-detail ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.tk-detail li { margin-bottom: 0.3rem; }
+.tk-ref {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.75rem;
+}
+.tk-tier {
+  display: inline-block;
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.tier-1 { background: #e8f5e9; color: #2e7d32; }
+.tier-2 { background: #e3f2fd; color: #1565c0; }
+.tier-3 { background: #fce4ec; color: #c62828; }
+.tier-all { background: var(--accent-bg); color: var(--accent); }
+
+/* Expand/collapse indicator */
+.tk-toggle {
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-align: right;
+  margin-top: 0.5rem;
+}
+
+/* Footer */
+.footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.5rem; }
+  .toolkit-grid { grid-template-columns: 1fr; }
+  .header-nav { display: none; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Search */
+.search-box {
+  max-width: var(--max-width);
+  margin: 0 auto 1.5rem;
+  padding: 0 2rem;
+}
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  background: var(--card);
+  color: var(--text);
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Phase indicator */
+.phase-bar {
+  max-width: var(--max-width);
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+.phase-timeline {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+.phase-item {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.75rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.phase-item:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.phase-item:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+.phase-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid var(--border);
+  z-index: 1;
+}
+.phase-item.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.phase-item .phase-label { font-size: 0.7rem; font-weight: 700; }
+.phase-item .phase-name { font-size: 0.75rem; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-brand">MIRA TUKU <span>MEMBERSHIP TOOLKIT</span></div>
+    <nav class="header-nav">
+      <a href="#overview">概要</a>
+      <a href="#community">共同体構築</a>
+      <a href="#foresight">フォーサイト</a>
+      <a href="#dialogue">対話手法</a>
+      <a href="#commons">知識コモンズ</a>
+      <a href="#engagement">エンゲージメント</a>
+    </nav>
+  </div>
+</div>
+
+<div class="hero" id="overview">
+  <div class="hero-subtitle">Epistemic Community Membership Toolkit</div>
+  <h1>認識的共同体メンバーシップ<br>実践ツールキット</h1>
+  <p class="hero-desc">
+    ホワイトペーパー「知識運動体のためのメンバーシップ」で提案した認識的共同体モデルを具体化するための手法・フレームワーク・ツールを集約した実践ガイドです。各ツールキットは、メンバーシップの三層構造（Sensing Members / Inquiry Fellows / Stewards）のどの層で、いつ、どのように活用するかを明示しています。
+  </p>
+</div>
+
+<!-- Phase timeline -->
+<div class="phase-bar">
+  <div class="phase-timeline">
+    <div class="phase-item active" onclick="filterPhase('all')">
+      <div class="phase-label">ALL</div>
+      <div class="phase-name">全フェーズ</div>
+    </div>
+    <div class="phase-item" onclick="filterPhase('onboarding')">
+      <div class="phase-label">PHASE 1</div>
+      <div class="phase-name">参加・導入</div>
+    </div>
+    <div class="phase-item" onclick="filterPhase('inquiry')">
+      <div class="phase-label">PHASE 2</div>
+      <div class="phase-name">探究サイクル</div>
+    </div>
+    <div class="phase-item" onclick="filterPhase('deepening')">
+      <div class="phase-label">PHASE 3</div>
+      <div class="phase-name">深化・合宿</div>
+    </div>
+    <div class="phase-item" onclick="filterPhase('governance')">
+      <div class="phase-label">PHASE 4</div>
+      <div class="phase-name">自治・運営</div>
+    </div>
+    <div class="phase-item" onclick="filterPhase('harvest')">
+      <div class="phase-label">PHASE 5</div>
+      <div class="phase-name">収穫・統合</div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-card"><div class="label">ツールキット総数</div><div class="value" id="statTotal">0</div></div>
+  <div class="stat-card"><div class="label">カテゴリ</div><div class="value" id="statCats">6</div></div>
+  <div class="stat-card"><div class="label">学術的根拠あり</div><div class="value" id="statAcademic">0</div></div>
+  <div class="stat-card"><div class="label">対象層</div><div class="value">3層</div></div>
+</div>
+
+<!-- Search -->
+<div class="search-box">
+  <input type="text" class="search-input" id="searchInput" placeholder="ツールキットを検索..." oninput="renderAll()">
+</div>
+
+<!-- Category nav -->
+<div class="cat-nav" id="catNav"></div>
+
+<!-- Main content -->
+<div class="main" id="mainContent"></div>
+
+<div class="footer">
+  NPO法人ミラツク | 認識的共同体メンバーシップ ツールキット | 2026年4月
+</div>
+
+<script>
+// ============================================================
+// TOOLKIT DATA
+// ============================================================
+const TOOLKITS = [
+
+// === 1. 共同体構築（Community Building） ===
+{
+  id: 'cop-lifecycle',
+  cat: 'community',
+  num: 1,
+  title: 'Wenger-Traynerの実践共同体ライフサイクルモデル',
+  origin: 'Etienne & Beverly Wenger-Trayner, 2002',
+  desc: '実践共同体が「潜在期→結集期→成熟期→スチュワードシップ期→変容期」の5段階を経て発展する理論モデル。各段階で必要なリーダーシップと介入が異なる。',
+  tags: ['実践共同体', '組織設計', '段階的発展'],
+  tiers: ['all'],
+  phases: ['onboarding', 'governance'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. 潜在期（Potential）: 共通の関心を持つ人々のゆるいネットワークを特定する',
+      '2. 結集期（Coalescing）: 定期的な交流の場を設け、共同の事業（joint enterprise）を明確化する',
+      '3. 成熟期（Maturing）: メンバーの役割分化が進み、共有レパートリー（語彙・ツール・物語）が蓄積される',
+      '4. スチュワードシップ期（Stewardship）: リーダーシップが分散し、コミュニティが自律的に運営される',
+      '5. 変容期（Transformation）: 目的の達成や環境変化により、統合・分裂・発展的解消が起きる'
+    ],
+    application: 'ミラツクのメンバーシップは2026年下半期のパイロットで「結集期」から開始し、2027年に「成熟期」への移行を目指す。各段階での介入ポイントを予め設計しておくことで、自然な成長を支援できる。',
+    ref: 'Wenger, E., McDermott, R. & Snyder, W. (2002). Cultivating Communities of Practice. Harvard Business School Press.'
+  }
+},
+{
+  id: 'lpp-design',
+  cat: 'community',
+  num: 2,
+  title: '正統的周辺参加（LPP）の実装設計',
+  origin: 'Jean Lave & Etienne Wenger, 1991',
+  desc: '新参者が共同体の「周辺」から正統的に参加し、徐々に中心的な実践へと移行するプロセスを意図的に設計する手法。',
+  tags: ['オンボーディング', '参加設計', '学習理論'],
+  tiers: ['tier-1'],
+  phases: ['onboarding'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. 「観察可能な実践」を設計する: 新メンバーがまず他のメンバーの活動を見られる場を作る（シグナルフィードの閲覧、探究レポートの読み込み）',
+      '2. 「低リスクの貢献機会」を用意する: 最初の1週間で行える小さな貢献（自己紹介での「今の関心」共有、既存シグナルへのコメント）',
+      '3. 「徒弟的ペアリング」を実施する: 新メンバーを既存のInquiry Fellowとペアにし、探究サイクルの進め方を体験的に学ぶ',
+      '4. 「参加の深化マーカー」を設定する: 数値化せず、自然なステップ（初めてのシグナル投稿→探究チームへの参加→ファシリテーション体験）を可視化'
+    ],
+    application: 'Sensing Members圏での「第一の贈与」体験の設計に直結する。新メンバーが最初の1週間で「自分の知見がここでは価値を持つ」と感じる瞬間を意図的にデザインする。',
+    ref: 'Lave, J. & Wenger, E. (1991). Situated Learning: Legitimate Peripheral Participation. Cambridge University Press.'
+  }
+},
+{
+  id: 'distributed-leadership',
+  cat: 'community',
+  num: 3,
+  title: '分散型リーダーシップモデル',
+  origin: 'Wenger-Trayner, Leadership Groups for Social Learning',
+  desc: 'コミュニティの会合において、リーダーシップを全参加者に分散させる手法。各グループがプロセスの一部分をスチュワードする。',
+  tags: ['リーダーシップ', 'ファシリテーション', '自律性'],
+  tiers: ['tier-2', 'tier-3'],
+  phases: ['governance'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. 会合の学習プロセスを複数のパートに分割する（問いの設定、対話のファシリテーション、ハーベスティング、次のステップの整理など）',
+      '2. 各パートを異なるグループに割り当て、そのグループが該当パートの「スチュワード（守り手）」となる',
+      '3. スチュワードはそのパートについて事前に準備し、当日にリードする',
+      '4. 会合の終わりに全体でリフレクションし、プロセス自体の改善を議論する'
+    ],
+    application: 'Stewards圏の「個人スチュワード」の役割設計に直結。探究サイクルのファシリテーションを1人に依存させず、メンバー間で回転させることで当事者意識を醸成する。',
+    ref: 'Wenger-Trayner (2024). Leadership Groups for Social Learning. wenger-trayner.com'
+  }
+},
+{
+  id: 'cscce-model',
+  cat: 'community',
+  num: 4,
+  title: 'CSCCE コミュニティ参加モデル',
+  origin: 'Center for Scientific Collaboration and Community Engagement, 2020',
+  desc: '科学コミュニティの参加を5段階で定義するモデル。CONVEY/CONSUME→CONTRIBUTE→COLLABORATE→CO-CREATE→CHAMPION。各段階で必要な支援が異なる。',
+  tags: ['参加モデル', '段階設計', '科学コミュニティ'],
+  tiers: ['all'],
+  phases: ['onboarding', 'inquiry', 'governance'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. CONVEY/CONSUME: メンバーが情報を受け取る段階（シグナルフィードの閲覧、レポート読み込み）',
+      '2. CONTRIBUTE: メンバーが小さな貢献を行う段階（シグナル投稿、コメント、問いの共有）',
+      '3. COLLABORATE: メンバーが他者と協働する段階（探究チームでの共同作業）',
+      '4. CO-CREATE: メンバーがコミュニティの方向性そのものを共に創る段階（テーマ設定への参加、レポートの共同執筆）',
+      '5. CHAMPION: メンバーがコミュニティの価値を外部に伝える段階（フォーラムでの発表、外部への推薦）'
+    ],
+    application: '三層構造との対応: Sensing Members→CONSUME/CONTRIBUTE、Inquiry Fellows→COLLABORATE/CO-CREATE、Stewards→CO-CREATE/CHAMPION。各メンバーの現在位置を把握し、次の段階への移行を支援する。',
+    ref: 'CSCCE (2020). Community Participation Model. cscce.org'
+  }
+},
+{
+  id: 'boundary-objects',
+  cat: 'community',
+  num: 5,
+  title: '境界オブジェクト（Boundary Objects）',
+  origin: 'Susan Leigh Star & James Griesemer, 1989',
+  desc: '異なる専門分野の人々が協働する際に、各自の解釈を保ちつつ共通の参照点として機能する「もの」を意図的に設計する手法。',
+  tags: ['異分野協働', '翻訳', '共通言語'],
+  tiers: ['tier-2'],
+  phases: ['inquiry'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. 共同体内の異なる専門分野を特定し、それぞれの「関心のレンズ」を明示化する',
+      '2. 複数の分野が関心を寄せる共通のオブジェクト（概念、図表、プロトタイプ、シナリオ等）を特定または創出する',
+      '3. 各分野のメンバーがそのオブジェクトに自分の解釈を付与する「アノテーション・セッション」を実施する',
+      '4. 解釈の差異そのものを「発見」として記録し、探究の出発点とする'
+    ],
+    application: 'ミラツクの「シグナルカード」を境界オブジェクトとして設計する。ビジネス担当者と研究者と行政職員が同じシグナルに異なる解釈を付与し、その差異から新たな問いが生まれる仕組み。',
+    ref: 'Star, S.L. & Griesemer, J.R. (1989). "Institutional Ecology, Translations and Boundary Objects." Social Studies of Science, 19(3), 387-420.'
+  }
+},
+
+// === 2. フォーサイト・シグナルスキャニング ===
+{
+  id: 'signal-card',
+  cat: 'foresight',
+  num: 6,
+  title: 'シグナルカード・テンプレート（厚い記述版）',
+  origin: 'IFTF / Forum for the Future + Geertzの厚い記述',
+  desc: '変化の兆し（Signal of Change）を構造的に記述するためのカードフォーマット。人類学的「厚い記述」のエッセンスを取り入れ、単なる事実報告を超えた解釈を促す。',
+  tags: ['シグナル', 'フォーサイト', '厚い記述', 'テンプレート'],
+  tiers: ['all'],
+  phases: ['inquiry'],
+  academic: true,
+  detail: {
+    howto: [
+      '【テンプレート項目】',
+      '1. What: 何が起きているか（事実の記述）',
+      '2. Where: どこで観察したか（自分のフィールド/業界/地域）',
+      '3. So What: なぜこれが重要だと感じたか（自分の経験に照らした解釈）',
+      '4. Thick Layer: この変化の「背景にある文脈」は何か（文化的・構造的要因の記述）',
+      '5. Connection: 他のどのようなシグナルやトレンドと関連しそうか',
+      '6. Question: この変化から生まれる「問い」は何か',
+      '',
+      '【記入のガイド】',
+      '- 「誰が」「なぜ」を意識して記述する（Geertzの「まばたき」と「ウインク」の違い）',
+      '- 自分の専門領域の「レンズ」を明示する（「エンジニアとして見ると...」「人事担当として感じるのは...」）',
+      '- 1枚200-400字を目安にする'
+    ],
+    application: 'Sensing Members圏の核心的活動。毎週1枚のシグナルカードを投稿することを「最小の贈与」として設計する。人類学概念データベースとの自動マッチング機能と連携し、学術的な深みを自動付加する。',
+    ref: 'Geertz, C. (1973). The Interpretation of Cultures; IFTF Signals System (iftf.org/what-we-do/foresight-tools/signals/)'
+  }
+},
+{
+  id: 'three-horizons',
+  cat: 'foresight',
+  num: 7,
+  title: 'Three Horizons フレームワーク',
+  origin: 'Bill Sharpe (IFF), 2013',
+  desc: '現在の支配的システム（H1）、移行期の革新（H2）、未来のビジョン（H3）の3つの時間軸で変化を構造的に理解するフレームワーク。参加型ワークショップとして実施可能。',
+  tags: ['未来洞察', 'ワークショップ', '構造分析'],
+  tiers: ['tier-2', 'tier-3'],
+  phases: ['inquiry'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. テーマを設定する（例: 「2035年の学びの形」）',
+      '2. H1の記述: 現在の支配的なパターン・制度・前提を洗い出す（30分）',
+      '3. H3の記述: 望ましい未来のビジョンを描く――制約を外して理想を語る（30分）',
+      '4. H2の記述: H1→H3の移行を促す「兆し」「実験」「イノベーション」を特定する（30分）',
+      '5. 統合: 3つのホライゾンの関係を1枚の図にまとめ、「今何をすべきか」を議論する（30分）',
+      '',
+      '【推奨人数】8-20名 【所要時間】2-3時間'
+    ],
+    application: '四半期ごとの探究サイクルの「問い設定」フェーズで使用。Inquiry Fellowsが共同で探究テーマの構造を理解し、どの「ホライゾン」に焦点を当てるかを決定する。',
+    ref: 'Sharpe, B. (2013). Three Horizons: The Patterning of Hope. Triarchy Press.'
+  }
+},
+{
+  id: 'cla',
+  cat: 'foresight',
+  num: 8,
+  title: '因果階層分析（CLA: Causal Layered Analysis）',
+  origin: 'Sohail Inayatullah, 1998',
+  desc: '問題を4層（リタニー→社会的原因→ディスコース/世界観→メタファー/神話）で分析するフォーサイト手法。表層的なトレンドから深層の文化的前提までを掘り下げる。',
+  tags: ['深層分析', 'フォーサイト', '世界観', '批判的思考'],
+  tiers: ['tier-2'],
+  phases: ['inquiry', 'deepening'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. リタニー層: メディアで語られる「表面的な事実」を列挙する',
+      '2. 社会的原因層: その事実を生み出している制度的・構造的要因を分析する',
+      '3. ディスコース/世界観層: その構造を支えている「当然視された前提」を問い直す',
+      '4. メタファー/神話層: その世界観の根底にある物語・隠喩を発見する',
+      '5. 各層での「オルタナティブ」を構想し、新しいメタファーから逆算して未来像を描く',
+      '',
+      '【推奨人数】5-15名 【所要時間】2-4時間'
+    ],
+    application: '探究サイクルの「深い分析」フェーズで使用。表面的なトレンド分析で終わらせず、文化的前提の層まで掘り下げることで、ミラツクの人類学的まなざしの強みを最大限に活かす。',
+    ref: 'Inayatullah, S. (1998). "Causal Layered Analysis: Poststructuralism as Method." Futures, 30(8), 815-829.'
+  }
+},
+{
+  id: 'futures-literacy-lab',
+  cat: 'foresight',
+  num: 9,
+  title: 'フューチャーズ・リテラシー・ラボラトリー（FLL）',
+  origin: 'UNESCO / Riel Miller, 2018',
+  desc: '参加者が「未来の使い方」そのものを学ぶワークショップ形式。予測の正確さではなく、予期（anticipation）の多様性を高めることを目的とする。',
+  tags: ['UNESCO', 'フューチャーズ・リテラシー', 'ワークショップ', '集合知'],
+  tiers: ['tier-2', 'tier-3'],
+  phases: ['inquiry', 'deepening'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. Phase 1「暗黙の前提を顕在化する」: 参加者がテーマについて「ありそうな未来」を描く。その際に自動的に使っている前提を記録する',
+      '2. Phase 2「前提を揺さぶる」: 全く異なる前提（技術、文化、制度のラディカルな変化）を導入し、別の未来を描く',
+      '3. Phase 3「リフレーミング」: 2つの未来像の「差分」から、自分の予期のパターン（anticipatory assumption）を発見する',
+      '4. Phase 4「行動へ」: 新たな予期の能力を使って、現在の意思決定を見直す',
+      '',
+      '【推奨人数】15-30名 【所要時間】1-2日'
+    ],
+    application: '年2回の合宿（未来庵）のメインプログラムとして実施。Turnerのリミナリティ理論と組み合わせ、日常の前提から解放された状態で未来を探究する。',
+    ref: 'Miller, R. (2018). Transforming the Future: Anticipation in the 21st Century. UNESCO/Routledge.'
+  }
+},
+{
+  id: 'horizon-scanning',
+  cat: 'foresight',
+  num: 10,
+  title: 'メンバー参加型ホライゾンスキャニング',
+  origin: 'Policy Horizons Canada / UK Government Office for Science',
+  desc: '政府機関が開発した体系的なシグナル収集手法を、メンバーシップコミュニティの参加型活動に適応したもの。メンバー各自が「スキャナー」として自分のフィールドから変化の兆しを収集する。',
+  tags: ['ホライゾンスキャニング', '参加型', '体系的収集'],
+  tiers: ['all'],
+  phases: ['inquiry'],
+  academic: false,
+  detail: {
+    howto: [
+      '1. スキャニング領域をPESTLE（政治・経済・社会・技術・法規制・環境）で構造化する',
+      '2. 各メンバーに自分の専門領域に基づいた「スキャニング担当」を自発的に割り当てる',
+      '3. 月次で「スキャニング・ブリーフィング」を実施: 各担当が発見したシグナルを3分で共有',
+      '4. シグナル間の「クラスタリング」をワークショップ形式で実施: 類似するシグナルをグループ化し、新興テーマを特定',
+      '5. 四半期ごとに「ホライゾンスキャニング・レポート」として統合する'
+    ],
+    application: 'ミラツクのPESTLEパイプライン（毎日各カテゴリ50件のニュース自動収集）と連携。AIによる自動収集とメンバーによる人間的な観察を組み合わせることで、定量と定性の両面からシグナルを捕捉する。',
+    ref: 'Policy Horizons Canada (2024). Horizons Foresight Method. horizons.gc.ca'
+  }
+},
+
+// === 3. 対話・ファシリテーション ===
+{
+  id: 'world-cafe',
+  cat: 'dialogue',
+  num: 11,
+  title: 'ワールドカフェ',
+  origin: 'Juanita Brown & David Isaacs, 1995',
+  desc: 'カフェのようなリラックスした雰囲気の中で、小グループが入れ替わりながら対話を重ねることで、集合的な知恵を引き出す手法。',
+  tags: ['大人数対話', 'カジュアル', '集合知'],
+  tiers: ['all'],
+  phases: ['inquiry', 'deepening'],
+  academic: false,
+  detail: {
+    howto: [
+      '1. 4-5人のテーブルを複数設置し、各テーブルに模造紙とペンを用意する',
+      '2. 問いを提示し、各テーブルで20-30分の対話を行う',
+      '3. 1人の「テーブルホスト」を残し、他のメンバーは別のテーブルに移動する',
+      '4. ホストが前のラウンドの要点を新メンバーに共有し、対話を深める',
+      '5. 3-4ラウンド繰り返した後、全体でハーベスティング（収穫）を行う',
+      '',
+      '【推奨人数】12-100名+ 【所要時間】1.5-3時間'
+    ],
+    application: '第一圏（Sensing Members）の月次「問いの時間」オンライン版として、またフォーラムでの大人数対話として使用。Zoom/GatherTownのブレイクアウト機能で実施可能。',
+    ref: 'Brown, J. & Isaacs, D. (2005). The World Cafe: Shaping Our Futures Through Conversations That Matter. Berrett-Koehler.'
+  }
+},
+{
+  id: 'liberating-structures',
+  cat: 'dialogue',
+  num: 12,
+  title: 'Liberating Structures（主要7手法）',
+  origin: 'Henri Lipmanowicz & Keith McCandless',
+  desc: '従来の会議形式（プレゼン→質疑→議論）に代わる33の「マイクロストラクチャー」。特にメンバーシップに有用な7つを厳選。',
+  tags: ['ファシリテーション', 'マイクロストラクチャー', '全員参加'],
+  tiers: ['all'],
+  phases: ['inquiry', 'deepening', 'harvest'],
+  academic: false,
+  detail: {
+    howto: [
+      '【1-2-4-All】（12分）個人→ペア→4人→全体の段階で問いを深める。全員が声を出す最もシンプルな手法',
+      '',
+      '【Troika Consulting】（30分）3人組で交代でコンサルティング。1人がクライアント、2人がコンサルタント。クライアントは背を向け、コンサルタントが「あたかもいないかのように」助言を議論する',
+      '',
+      '【What, So What, Now What?（W3）】（45分）経験の振り返りを3段階で構造化。事実→意味づけ→次の行動',
+      '',
+      '【Discovery & Action Dialogue（DAD）】（40分）すでに解決策を見つけている人（ポジティブ・デビアント）を発見し、その知恵を共有する',
+      '',
+      '【25/10 Crowd Sourcing】（30分）各自がアイデアを書いたカードを回覧し、5段階評価。上位アイデアを即座に特定',
+      '',
+      '【Wise Crowds】（60分）Troikaの拡張版。5人組で交代制コンサルティング',
+      '',
+      '【Ecocycle Planning】（90分）活動を「誕生→成長→成熟→創造的破壊→再生」のサイクル上にマッピングし、ポートフォリオを見直す'
+    ],
+    application: '探究サイクルの各フェーズで適切な手法を選択。「問い設定」に25/10 Crowd Sourcing、「中間振り返り」にW3、「ピアサポート」にTroika Consulting、「年間計画」にEcocycle Planning。',
+    ref: 'Lipmanowicz, H. & McCandless, K. (2013). The Surprising Power of Liberating Structures. liberatingstructures.com'
+  }
+},
+{
+  id: 'theory-u',
+  cat: 'dialogue',
+  num: 13,
+  title: 'Theory U プレゼンシング・メソッド',
+  origin: 'Otto Scharmer, MIT, 2006',
+  desc: '「U」字型の深い聴取プロセスを通じて、過去のパターンを手放し（letting go）、創発的な未来を迎え入れる（letting come）変容的対話の手法。',
+  tags: ['変容', '深い聴取', 'プレゼンシング', 'MIT'],
+  tiers: ['tier-2', 'tier-3'],
+  phases: ['deepening'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. Downloading: 習慣的な思考パターンで聴く（自覚する）',
+      '2. Seeing: 判断を保留し、新鮮な目で観察する（Open Mind）',
+      '3. Sensing: 全体のシステムとして感じ取る（Open Heart）',
+      '4. Presencing: 最も深い可能性の源に触れる（Open Will）',
+      '5. Crystallizing: 浮かび上がったビジョンを明確にする',
+      '6. Prototyping: 小さく素早く実験する',
+      '7. Performing: 新しい実践を日常に統合する',
+      '',
+      '【実践ツール】ジャーナリング（毎朝15分の内省記録）、センシング・ジャーニー（現場訪問）、スタック・セッション（U字の底での瞑想的対話）'
+    ],
+    application: '合宿（未来庵）2日目の「深い対話」セッションの理論的基盤。Turnerのリミナリティの場で、参加者が日常の認知パターンを一時的に離れ、コミュニタスを経験するプロセスとして設計する。',
+    ref: 'Scharmer, C.O. (2016). Theory U: Leading from the Future as It Emerges. 2nd ed. Berrett-Koehler.'
+  }
+},
+{
+  id: 'bohm-dialogue',
+  cat: 'dialogue',
+  num: 14,
+  title: 'ボーム・ダイアローグ',
+  origin: 'David Bohm, 1996',
+  desc: '議論（discussion）でも討論（debate）でもない、「思考のプロセスそのものを観察する」対話形式。前提や仮定を保留（suspension）し、集合的な意味生成を目指す。',
+  tags: ['深い対話', '前提の保留', '集合的思考'],
+  tiers: ['tier-2'],
+  phases: ['deepening'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. 円形に座る。テーブルなし。全員が対等に見えるレイアウト',
+      '2. ファシリテーターがガイドラインを共有: 「判断を保留する」「聴くことに集中する」「探究のために話す」',
+      '3. 最初の問いを提示する（あるいは沈黙から始める）',
+      '4. 発言したい人が発言する。順番はない。沈黙も対話の一部',
+      '5. 自分の中に生じる「反応」（同意、反発、不安）を観察し、それ自体をシェアする',
+      '6. 90-120分。結論を出さない。プロセスそのものが成果',
+      '',
+      '【推奨人数】8-25名 【所要時間】90-120分'
+    ],
+    application: '合宿の「脱構築セッション」に最適。肩書きやヒエラルキーが溶解するリミナルな空間で、参加者が自分の思考パターンを観察し、他者の世界観に触れる。',
+    ref: 'Bohm, D. (1996). On Dialogue. Routledge.'
+  }
+},
+{
+  id: 'thinking-environment',
+  cat: 'dialogue',
+  num: 15,
+  title: 'Thinking Environment（思考の環境）',
+  origin: 'Nancy Kline, 1999',
+  desc: '「人は良質な注目の中で最もよく考える」という原理に基づく10の要素。特に「聴くことの質」を極限まで高める手法。',
+  tags: ['傾聴', '思考の質', '注目', '対等性'],
+  tiers: ['all'],
+  phases: ['inquiry', 'deepening'],
+  academic: false,
+  detail: {
+    howto: [
+      '【10の要素】',
+      '1. Attention: 中断せず、完全に聴く',
+      '2. Equality: 全員に均等な発言の機会',
+      '3. Ease: 急がない。時間的余裕',
+      '4. Appreciation: 5:1の比率で肯定的なフィードバック',
+      '5. Encouragement: 競争ではなく探究',
+      '6. Feelings: 感情の表出を許容',
+      '7. Information: 正確な情報の提供',
+      '8. Diversity: 多様な視点の歓迎',
+      '9. Incisive Questions: 制限的な前提を取り除く「鋭い問い」',
+      '10. Place: 「あなたは重要だ」と伝える物理的空間',
+      '',
+      '【Thinking Pairs】2人組で交互に「聴き手」と「話し手」を務める。聴き手は完全に聴くことに徹する（5-10分ずつ）'
+    ],
+    application: '探究サイクルの対話セッション冒頭で「ラウンド」（全員が順に1-2分話す）を導入。日本的な場で起きがちな発言の偏りを構造的に解消する。合宿での1:1対話にThinking Pairsを使用。',
+    ref: 'Kline, N. (1999). Time to Think: Listening to Ignite the Human Mind. Cassell.'
+  }
+},
+{
+  id: 'open-space',
+  cat: 'dialogue',
+  num: 16,
+  title: 'オープン・スペース・テクノロジー（OST）',
+  origin: 'Harrison Owen, 1985',
+  desc: '参加者自身がアジェンダを設定し、自律的に対話を組織する手法。「足の法則（2つの足の法則）」により、参加者は自由にセッション間を移動できる。',
+  tags: ['自律', '参加型', 'アジェンダ設定', '大人数'],
+  tiers: ['all'],
+  phases: ['inquiry', 'deepening'],
+  academic: false,
+  detail: {
+    howto: [
+      '1. オープニング: ファシリテーターがテーマと「4つの原則」「1つの法則」を共有する',
+      '  - 原則: (a)来た人が適切な人 (b)何が起ころうと起こるべきこと (c)始まる時が適切な時 (d)終わったら終わり',
+      '  - 足の法則: 学んでもいないし貢献もしていないと感じたら、別の場所に移動すること',
+      '2. マーケットプレイス: 参加者がテーマを模造紙に書き、壁に貼る。時間枠と場所を自分で選ぶ',
+      '3. セッション実施: 各テーマの提案者がファシリテーターとなり、対話を進める',
+      '4. ハーベスティング: 各セッションの記録を共有し、アクションアイテムをまとめる',
+      '',
+      '【推奨人数】20-200名 【所要時間】半日-2日'
+    ],
+    application: '年次のテーマ設定会合で使用。Stewards圏が方向性を示しつつ、全メンバーが自発的に問いを提案し、自律的に探究グループを形成する。Ostromのコモンズ・ガバナンスの「集団的選択」を体現。',
+    ref: 'Owen, H. (2008). Open Space Technology: A User\'s Guide. 3rd ed. Berrett-Koehler.'
+  }
+},
+
+// === 4. 知識コモンズ ===
+{
+  id: 'ostrom-checklist',
+  cat: 'commons',
+  num: 17,
+  title: 'Ostrom 8原則チェックリスト（知識コモンズ版）',
+  origin: 'Elinor Ostrom, 1990 / Hess & Ostrom, 2007',
+  desc: 'Ostromの共有資源ガバナンスの8原則を知識コモンズの文脈に翻訳した実装チェックリスト。各原則の具体的な実装方法を定義する。',
+  tags: ['ガバナンス', 'コモンズ', '制度設計', 'チェックリスト'],
+  tiers: ['tier-3'],
+  phases: ['governance'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. 明確な境界 → メンバーシップの各圏の参加基準を明文化。知識コモンズへのアクセス権限を層別に設定',
+      '2. 利用と提供の適合 → 「閲覧」と「貢献」のバランスを年次リフレクションで確認。フリーライドの傾向をスチュワードが観察',
+      '3. 集団的選択 → 年間テーマ設定は全メンバー投票。運営方針の変更はスチュワード会議+全体共有',
+      '4. モニタリング → 個人スチュワードによる品質観察。数値化ではなく物語的な報告',
+      '5. 段階的制裁 → 個人対話→参加制限の段階的対応。追放は最終手段',
+      '6. 紛争解決 → スチュワード会議での調停。必要に応じて外部のメディエーター',
+      '7. 自治権の承認 → 運営方針はメンバーが決定。ミラツクは「場の提供者」であり「所有者」ではない',
+      '8. 重層的組織化 → 三層同心円による重層構造。各層に適切な意思決定権限'
+    ],
+    application: 'Stewards圏の年次ガバナンスレビューで使用。8原則に照らして現状を評価し、改善点を特定する。',
+    ref: 'Ostrom, E. (1990). Governing the Commons. Cambridge UP; Hess, C. & Ostrom, E. (2007). Understanding Knowledge as a Commons. MIT Press.'
+  }
+},
+{
+  id: 'apache-way',
+  cat: 'commons',
+  num: 18,
+  title: 'Apache Way メリトクラシー・ガバナンス',
+  origin: 'Apache Software Foundation',
+  desc: 'オープンソースコミュニティで実証済みの実力主義ガバナンスモデル。貢献に基づいて権限が付与され、合意形成はLazy Consensus方式で行う。',
+  tags: ['オープンソース', 'メリトクラシー', '合意形成', 'ガバナンス'],
+  tiers: ['tier-2', 'tier-3'],
+  phases: ['governance'],
+  academic: false,
+  detail: {
+    howto: [
+      '【役割の段階】User → Contributor → Committer → PMC Member → PMC Chair',
+      '',
+      '【Lazy Consensus】提案に対して一定期間内に明示的な反対がなければ合意とみなす。反対する場合は必ず代替案を提示する義務がある',
+      '',
+      '【適用方法】',
+      '1. 知識コモンズへの貢献（シグナル投稿、レポート執筆、ファシリテーション）の実績に基づいてスチュワード候補を特定',
+      '2. 既存スチュワードの推薦+全体承認によりスチュワードに就任',
+      '3. 運営方針の決定はLazy Consensusで: 提案をメンバー全体に共有し、1週間以内に反対がなければ採用',
+      '4. 反対意見には必ず代替案を求める（建設的な反対のみ有効）'
+    ],
+    application: 'Stewards圏の意思決定プロセスに適用。ゲーミフィケーション（ポイント・バッジ）ではなく、質的な貢献の認知と段階的な権限付与として設計する。',
+    ref: 'Apache Software Foundation. The Apache Way. apache.org/foundation/how-it-works/'
+  }
+},
+{
+  id: 'gratitude-wall',
+  cat: 'commons',
+  num: 19,
+  title: '感謝の壁（Gratitude Wall）と貢献ナラティブ',
+  origin: 'Gift Economy practice / Burning Man community principles',
+  desc: 'ゲーミフィケーション（ポイント・バッジ・リーダーボード）を使わずに貢献を認知する手法群。物語的な認知と感謝の循環を生む。',
+  tags: ['贈与経済', '認知', '非ゲーミフィケーション', '感謝'],
+  tiers: ['all'],
+  phases: ['harvest', 'governance'],
+  academic: false,
+  detail: {
+    howto: [
+      '【Gratitude Wall】',
+      '- デジタル空間（またはフィジカルな壁）に、メンバーが他のメンバーへの感謝を自由に投稿する',
+      '- 「○○さんのシグナル投稿から、自分の探究に新しい視角が生まれました」のように、具体的な影響を記述',
+      '',
+      '【貢献ナラティブ】',
+      '- 四半期ごとに、各メンバーの貢献を「物語」として記録する（数値ではなく）',
+      '- 「Aさんはヘルスケア業界からの独自の視点で、探究チームBの問いを根本的に変えた」',
+      '',
+      '【Annual Story】',
+      '- 年間の「コミュニティ・ストーリー」を共同で編纂。誰の貢献がどのように全体を豊かにしたかを物語形式でまとめる',
+      '',
+      '【避けるべきパターン】',
+      '- ポイント制: 贈与をトランザクションに退化させる',
+      '- リーダーボード: 競争を生み、協働を阻害する',
+      '- バッジ: 外発的動機づけが内発的動機を駆逐する（過正当化効果）'
+    ],
+    application: 'Maussの贈与経済論の実装。「温かいフィードバックの循環」を制度として設計する。年間レポートは数字のダッシュボードではなく、「今年の物語」として編纂する。',
+    ref: 'Hyde, L. (1983). The Gift. Vintage; Deci, E. & Ryan, R. (2000). Self-Determination Theory.'
+  }
+},
+{
+  id: 'warm-data',
+  cat: 'commons',
+  num: 20,
+  title: 'Warm Data アプローチ',
+  origin: 'Nora Bateson, International Bateson Institute',
+  desc: '定量的な「コールドデータ」では捉えられない、関係性の中にある生きた情報を「ウォームデータ」として扱う手法。Warm Data Labのプロセスで収集する。',
+  tags: ['関係性', '質的データ', 'システム思考', '複雑系'],
+  tiers: ['tier-2', 'tier-3'],
+  phases: ['harvest', 'inquiry'],
+  academic: true,
+  detail: {
+    howto: [
+      '【Warm Data Labの進め方】',
+      '1. 多面的な問いを設定する（例: 「メンバーシップの『健康さ』とは何か」）',
+      '2. 4-6人のグループに分かれ、異なる「レンズ」（経済的、感情的、文化的、時間的等）で問いを探究する',
+      '3. 15-20分ごとにグループを入れ替え、異なるレンズで同じ問いを考え直す',
+      '4. 全体で、レンズ間の「関係性」と「パターン」を共有する',
+      '5. 数値に還元できない「関係性の中の情報」をそのまま記録する',
+      '',
+      '【推奨人数】12-40名 【所要時間】2-3時間'
+    ],
+    application: 'コミュニティ・ヘルスの測定にNPSやエンゲージメント率の代わりにWarm Dataを使用。数値では捉えられない「関係性の質」「予期せぬ接続の頻度」「問いの深まり」を記録する。',
+    ref: 'Bateson, N. (2016). Small Arcs of Larger Circles. Triarchy Press.'
+  }
+},
+{
+  id: 'zettelkasten',
+  cat: 'commons',
+  num: 21,
+  title: '共有ツェッテルカステン（知識ネットワーク）',
+  origin: 'Niklas Luhmann, 1960s / 現代デジタル実装',
+  desc: 'ルーマンが開発した知識カードのネットワークシステムを、コミュニティの共有知識基盤として実装する。各メンバーの知見が相互にリンクされ、創発的な接続が可能になる。',
+  tags: ['知識管理', 'ネットワーク', 'カード', '創発'],
+  tiers: ['tier-2'],
+  phases: ['inquiry', 'harvest'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. 各メンバーが探究の過程で「知識カード」（200-400字のアトミックなメモ）を作成する',
+      '2. カードには必ず「自分の言葉での理解」「元の文脈」「他のカードとの関連」を含める',
+      '3. カード間にリンクを張り、知識のネットワークを構築する',
+      '4. 定期的に「ネットワーク散策」セッションを実施: ランダムなカードから始めてリンクをたどり、予期せぬ接続を発見する',
+      '5. 「孤立カード」（リンクの少ないカード）を定期的にレビューし、接続の可能性を探る',
+      '',
+      '【デジタル実装】Obsidian Publish、Notion、Wiki.js等で共有基盤を構築'
+    ],
+    application: '知識コモンズの「探究レポートライブラリ」のバックエンド構造として。レポートを章単位ではなくカード単位で蓄積し、異なる探究サイクルの成果が有機的に接続される仕組みを実現する。',
+    ref: 'Ahrens, S. (2017). How to Take Smart Notes. Soenke Ahrens; Luhmann, N. (1981). "Kommunikation mit Zettelkästen."'
+  }
+},
+
+// === 5. エンゲージメント・運営 ===
+{
+  id: 'orbit-model',
+  cat: 'engagement',
+  num: 22,
+  title: 'Orbit Model（コミュニティ重力モデル）',
+  origin: 'Orbit (orbit.love), 2020',
+  desc: 'コミュニティメンバーを「軌道」として捉えるモデル。中心に近いほど活動的で影響力が高い。Love（質的つながり）とReach（波及範囲）の2軸で評価する。',
+  tags: ['コミュニティ指標', '軌道モデル', 'エンゲージメント'],
+  tiers: ['tier-3'],
+  phases: ['governance', 'harvest'],
+  academic: false,
+  detail: {
+    howto: [
+      '【4つの軌道】',
+      '- Orbit 1: Ambassadors（最も活発、自発的に布教する）',
+      '- Orbit 2: Contributors（定期的に貢献する）',
+      '- Orbit 3: Participants（参加するが受動的）',
+      '- Orbit 4: Observers（閲覧のみ）',
+      '',
+      '【指標】',
+      '- Love: メンバーの質的な関与度（深い対話の頻度、他メンバーへの反応）',
+      '- Reach: そのメンバーの影響範囲（紹介数、外部への知見共有）',
+      '- Gravity: コミュニティ全体の引力（新規参加率、復帰率）',
+      '',
+      '【注意点】',
+      'ゲーミフィケーションに転化させない。軌道は運営の理解のために使い、メンバーには公開しない'
+    ],
+    application: '三層構造との対応: Orbit 4≒Sensing Members（観察段階）、Orbit 3≒活動的なSensing Members、Orbit 2≒Inquiry Fellows、Orbit 1≒Stewards。ただし数値的な追跡は最小限にし、質的な観察を重視。',
+    ref: 'Orbit Model (2020). orbit.love/model'
+  }
+},
+{
+  id: 'jeffersonian-dinner',
+  cat: 'engagement',
+  num: 23,
+  title: 'ジェファーソニアン・ディナー',
+  origin: 'Thomas Jefferson / 現代版: Matt Mullenweg等',
+  desc: 'トーマス・ジェファーソンが実践した「一つのテーブルで一つの話題を全員で話す」ディナー形式。8-14人の少人数で深い対話を共有する。',
+  tags: ['少人数対話', 'ディナー', '深い接続', 'リチュアル'],
+  tiers: ['tier-2', 'tier-3'],
+  phases: ['deepening'],
+  academic: false,
+  detail: {
+    howto: [
+      '1. 8-14人を招待する（異分野のミックスを意図的に設計）',
+      '2. 事前に1つの「問い」を共有する（例: 「あなたの仕事において、最も解決が難しい問題は何か」）',
+      '3. 全員が同じテーブルに座り、同じ会話に参加する（サイドトークなし）',
+      '4. ホストが問いを提示し、順番に1人ずつ応答する（最初の一周）',
+      '5. その後は自然な対話に移行。ホストは必要に応じて深い質問を挟む',
+      '6. 食事は会話を促進するための「場」として機能する',
+      '',
+      '【推奨人数】8-14名 【所要時間】2-3時間'
+    ],
+    application: 'Inquiry Fellows圏の四半期ごとの「深い対話」セッションとして。また法人パートナー（Stewards）との戦略対話の場として。未来庵での合宿の夕食を意図的に設計する。',
+    ref: 'Gladstone, B. "Jeffersonian Dinners." Interintellect.'
+  }
+},
+{
+  id: 'cohort-model',
+  cat: 'engagement',
+  num: 24,
+  title: 'コホートモデル（同期参加型）',
+  origin: 'On Deck / Pavilion / YPO',
+  desc: '同時期に参加したメンバーを「コホート（同期）」として結びつけ、共通の学習体験とアイデンティティを創出する手法。',
+  tags: ['コホート', '同期', 'オンボーディング', 'アイデンティティ'],
+  tiers: ['tier-2'],
+  phases: ['onboarding', 'inquiry'],
+  academic: false,
+  detail: {
+    howto: [
+      '1. メンバーの受入れを通年ではなく四半期ごとの「コホート」で行う',
+      '2. 各コホートは4-6週間の集中オンボーディング期間を共有する',
+      '  - Week 1: 自己紹介と「Now/Offer/Need」プロフィール作成',
+      '  - Week 2: メンバーとの1:1ミーティング（3人以上）',
+      '  - Week 3: 初めてのシグナル投稿と探究セッション参加',
+      '  - Week 4: コホート内での振り返りと今後の参加計画',
+      '3. コホートには名前やテーマを付ける（例: 「2027春・境界を越える探究者たち」）',
+      '4. コホート横断の接続機会を定期的に設ける（コホート間交流会）'
+    ],
+    application: 'Inquiry Fellows圏への新規参加をコホート方式で運営。四半期の探究サイクルと同期させ、参加の最初から「共同の事業」に巻き込む。On Deckの「最初の4時間/週」モデルを参考にした時間コミットメントの明示。',
+    ref: 'On Deck Fellowship Model (beondeck.com); Pavilion Community (joinpavilion.com)'
+  }
+},
+{
+  id: 'annual-rhythm',
+  cat: 'engagement',
+  num: 25,
+  title: '年間リズム設計（Seasonal Cadence）',
+  origin: 'ホワイトペーパー第3章3.4節',
+  desc: 'メンバーシップに「季節のリズム」を組み込み、探究サイクルと日本の季節感を連動させる年間設計。',
+  tags: ['年間計画', 'リズム', 'リチュアル', '季節'],
+  tiers: ['all'],
+  phases: ['governance'],
+  academic: false,
+  detail: {
+    howto: [
+      '【春（4-6月）】種蒔き',
+      '- 年度テーマ設定（OST + 全メンバー投票）',
+      '- 新コホートの受入れ・オンボーディング',
+      '- シグナルスキャニングの方向性決定',
+      '',
+      '【夏（7-9月）】第1探究サイクル',
+      '- 5-8名チームでの探究プロジェクト',
+      '- 未来庵での夏合宿（2泊3日）',
+      '- 中間成果の共有会',
+      '',
+      '【秋（10-12月）】第2探究サイクル + 公開',
+      '- フォーラム/カンファレンスでの成果発表',
+      '- 外部へのオープン・デー',
+      '- メンバー更新の告知',
+      '',
+      '【冬（1-3月）】収穫と省察',
+      '- 年間レポートの共同編纂',
+      '- Warm Data Labによるコミュニティ・ヘルスの省察',
+      '- 未来庵での冬合宿',
+      '- 次年度の種を探る「プレ・スキャニング」'
+    ],
+    application: '全層横断の年間運営フレームワーク。各イベントにLiberating Structures等の具体的手法を割り当てる。',
+    ref: 'ホワイトペーパー「知識運動体のためのメンバーシップ」第3章3.4節'
+  }
+},
+{
+  id: 'weick-sensemaking',
+  cat: 'foresight',
+  num: 26,
+  title: 'Weickのセンスメイキング7特性',
+  origin: 'Karl E. Weick, 1995',
+  desc: '組織がどのように曖昧な状況に「意味」を付与するかを説明する7つの特性。シグナルの集合的解釈プロセスの理論的基盤。',
+  tags: ['センスメイキング', '意味づけ', '組織理論', '解釈'],
+  tiers: ['tier-2'],
+  phases: ['inquiry', 'harvest'],
+  academic: true,
+  detail: {
+    howto: [
+      '【7つの特性】',
+      '1. アイデンティティに基づく: 「誰であるか」が何に注目するかを決定する',
+      '2. 回顧的: 意味は事後的に構成される（振り返りの中で理解が生まれる）',
+      '3. 環境の制定的: 人は自分が注目する環境を自ら作り出す',
+      '4. 社会的: 意味づけは常に他者との相互作用の中で起こる',
+      '5. 進行中: センスメイキングは一度きりではなく、常に進行中のプロセス',
+      '6. 手がかり（cue）に基づく: 小さな手がかりから大きなフレームが活性化される',
+      '7. もっともらしさ: 正確さよりも「もっともらしさ」が重要',
+      '',
+      '【実践への応用】',
+      '- 探究サイクルの「ハーベスティング」セッションで、各メンバーの「アイデンティティ（専門性）」がどのようにシグナルの解釈に影響したかを明示化する',
+      '- 「回顧的」な特性を活かし、定期的な振り返りの場で過去のシグナルに新しい意味を発見する'
+    ],
+    application: 'シグナルの集合的解釈プロセスの設計指針。メンバーの多様な「アイデンティティ」が同じシグナルに異なる「手がかり」を発見し、集合的な「もっともらしい物語」を紡ぎ出す。',
+    ref: 'Weick, K.E. (1995). Sensemaking in Organizations. Sage.'
+  }
+},
+{
+  id: 'cynefin',
+  cat: 'foresight',
+  num: 27,
+  title: 'Cynefinフレームワーク',
+  origin: 'Dave Snowden, 2003',
+  desc: '問題の性質を5つの領域（明確・煩雑・複雑・混沌・無秩序）に分類し、それぞれに適切な対応戦略を選択するフレームワーク。',
+  tags: ['複雑系', '問題分類', '意思決定', 'センスメイキング'],
+  tiers: ['tier-2', 'tier-3'],
+  phases: ['inquiry', 'governance'],
+  academic: true,
+  detail: {
+    howto: [
+      '【5つの領域と対応戦略】',
+      '1. Clear（明確）: 感知→分類→対応。ベストプラクティスが存在する',
+      '2. Complicated（煩雑）: 感知→分析→対応。専門家の分析が必要',
+      '3. Complex（複雑）: プローブ→感知→対応。実験して学ぶ',
+      '4. Chaotic（混沌）: 行動→感知→対応。まず安定化させる',
+      '5. Disorder（無秩序）: どの領域にいるかわからない状態',
+      '',
+      '【ワークショップ手法】',
+      '- 探究テーマをCynefinマトリクスにマッピングする',
+      '- 「複雑」領域のテーマには実験的アプローチを、「煩雑」領域にはベストプラクティス調査を割り当てる',
+      '- 探究サイクルの進行中に領域が移行することを前提とした設計'
+    ],
+    application: '探究サイクルの冒頭で「この問いはどの領域にあるか」をチームで議論し、適切な探究アプローチを選択する。ミラツクの探究テーマの多くは「複雑」領域にあり、「プローブ→感知→対応」のアプローチが適する。',
+    ref: 'Snowden, D. & Boone, M. (2007). "A Leader\'s Framework for Decision Making." Harvard Business Review.'
+  }
+},
+{
+  id: 'after-action-review',
+  cat: 'engagement',
+  num: 28,
+  title: 'After Action Review（AAR）',
+  origin: 'U.S. Army, 1970s / 組織学習への応用',
+  desc: '活動の直後に「何を意図したか」「何が起きたか」「なぜ差があったか」「次に何をするか」を構造的に振り返る手法。',
+  tags: ['振り返り', '学習', '継続改善', 'リフレクション'],
+  tiers: ['all'],
+  phases: ['harvest'],
+  academic: false,
+  detail: {
+    howto: [
+      '【4つの問い】',
+      '1. What did we intend to happen?（何を意図していたか）',
+      '2. What actually happened?（実際に何が起きたか）',
+      '3. Why was there a difference?（なぜ差が生じたか）',
+      '4. What will we do next time?（次は何を変えるか）',
+      '',
+      '【実施のポイント】',
+      '- 活動の直後（記憶が新鮮なうちに）に実施する',
+      '- 「責任追及」ではなく「学習」が目的であることを明示する',
+      '- 全参加者の声を聴く（ラウンド形式で全員発言）',
+      '- 15-30分で完了する簡潔さが持続の鍵',
+      '',
+      '【推奨人数】3-20名 【所要時間】15-30分'
+    ],
+    application: '探究サイクルの各セッション終了後、合宿の各日の夜、ファシリテーション後のリフレクション。Liberating StructuresのW3（What, So What, Now What?）と組み合わせて使用。',
+    ref: 'U.S. Army Training and Doctrine Command. After Action Review Guidelines.'
+  }
+},
+{
+  id: 'backcasting',
+  cat: 'foresight',
+  num: 29,
+  title: 'バックキャスティング',
+  origin: 'John Robinson, 1990 / The Natural Step',
+  desc: '望ましい未来から現在に「逆算」して、そこに至る道筋を設計する手法。フォーキャスティング（現在から延長）では見えない革新的な経路を発見する。',
+  tags: ['戦略設計', '逆算', '未来起点', 'アクション'],
+  tiers: ['tier-2', 'tier-3'],
+  phases: ['inquiry', 'harvest'],
+  academic: true,
+  detail: {
+    howto: [
+      '1. 望ましい未来像を具体的に描く（10-15年後）',
+      '2. その未来が実現している世界を詳細に記述する（5つの感覚で）',
+      '3. 現在の状態とのギャップを特定する',
+      '4. ギャップを埋めるための「マイルストーン」を逆算で設定する',
+      '5. 最初の一歩（6ヶ月以内に着手可能なアクション）を決定する',
+      '',
+      '【推奨人数】5-20名 【所要時間】2-4時間'
+    ],
+    application: '探究サイクルの「行動への橋渡し」フェーズで使用。探究で得られた洞察を、具体的なアクションプランに変換する。ホワイトペーパー第6章のロードマップ作成にも適用。',
+    ref: 'Robinson, J. (1990). "Futures under glass." Futures, 22(8), 820-842.'
+  }
+},
+{
+  id: 'graphic-harvesting',
+  cat: 'engagement',
+  num: 30,
+  title: 'グラフィック・ハーベスティング',
+  origin: 'David Sibbet / The Grove Consultants',
+  desc: '対話や探究プロセスの成果をリアルタイムで視覚的に記録する手法。言語化できない関係性やパターンを可視化し、共有知のアーティファクトを生成する。',
+  tags: ['可視化', 'ハーベスティング', 'アーティファクト', '記録'],
+  tiers: ['all'],
+  phases: ['inquiry', 'deepening', 'harvest'],
+  academic: false,
+  detail: {
+    howto: [
+      '1. 対話セッションにグラフィック・レコーダー（またはAIツール）を配置する',
+      '2. 発言の要点、関連性、メタファーをリアルタイムで図解する',
+      '3. セッション終了後に参加者と共に「収穫物」をレビューする',
+      '4. グラフィック記録を知識コモンズの「対話アーカイブ」に蓄積する',
+      '5. 過去のグラフィック記録を新しいセッションの「文脈提供」に再利用する',
+      '',
+      '【デジタル代替】Miro/FigJamによる協働ビジュアルノート、AIによる対話サマリーの自動図解'
+    ],
+    application: '探究サイクルの全セッション、合宿の各プログラムで実施。視覚的な記録が知識コモンズの「共有レパートリー」となり、新メンバーのオンボーディング素材としても機能する。',
+    ref: 'Sibbet, D. (2010). Visual Meetings. Wiley.'
+  }
+}
+];
+
+// ============================================================
+// CATEGORIES
+// ============================================================
+const CATEGORIES = {
+  community: { label: '共同体構築', desc: '実践共同体の形成・発展・ガバナンスの手法' },
+  foresight: { label: 'フォーサイト・シグナル', desc: 'シグナルスキャニング・未来洞察・センスメイキングの手法' },
+  dialogue: { label: '対話・ファシリテーション', desc: '深い対話・異分野協働・集合知生成の手法' },
+  commons: { label: '知識コモンズ', desc: 'コモンズ・ガバナンス・贈与経済・知識管理の手法' },
+  engagement: { label: 'エンゲージメント', desc: 'オンボーディング・運営・リズム・振り返りの手法' }
+};
+
+const TIER_LABELS = {
+  'all': '全層共通',
+  'tier-1': 'Sensing Members',
+  'tier-2': 'Inquiry Fellows',
+  'tier-3': 'Stewards'
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let currentCat = 'all';
+let currentPhase = 'all';
+let expandedId = null;
+
+// ============================================================
+// RENDER
+// ============================================================
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+function renderAll() {
+  const search = (document.getElementById('searchInput')?.value || '').toLowerCase();
+
+  let filtered = TOOLKITS.filter(tk => {
+    if (currentCat !== 'all' && tk.cat !== currentCat) return false;
+    if (currentPhase !== 'all' && !tk.phases.includes(currentPhase)) return false;
+    if (search) {
+      const haystack = (tk.title + ' ' + tk.desc + ' ' + tk.tags.join(' ') + ' ' + tk.origin).toLowerCase();
+      if (!haystack.includes(search)) return false;
+    }
+    return true;
+  });
+
+  // Stats
+  document.getElementById('statTotal').textContent = TOOLKITS.length;
+  document.getElementById('statAcademic').textContent = TOOLKITS.filter(t => t.academic).length;
+
+  // Category nav
+  const catNav = document.getElementById('catNav');
+  let catHtml = `<button class="cat-btn ${currentCat === 'all' ? 'active' : ''}" onclick="filterCat('all')">すべて<span class="cat-count">${TOOLKITS.length}</span></button>`;
+  for (const [key, val] of Object.entries(CATEGORIES)) {
+    const count = TOOLKITS.filter(t => t.cat === key).length;
+    catHtml += `<button class="cat-btn ${currentCat === key ? 'active' : ''}" onclick="filterCat('${key}')">${val.label}<span class="cat-count">${count}</span></button>`;
+  }
+  catNav.innerHTML = catHtml;
+
+  // Group by category
+  const main = document.getElementById('mainContent');
+  let html = '';
+
+  if (currentCat === 'all') {
+    for (const [key, val] of Object.entries(CATEGORIES)) {
+      const catItems = filtered.filter(t => t.cat === key);
+      if (catItems.length === 0) continue;
+      html += `<div class="section-header" id="${key}"><h2>${val.label}</h2><p>${val.desc}</p></div>`;
+      html += '<div class="toolkit-grid">';
+      catItems.forEach(tk => { html += renderCard(tk); });
+      html += '</div>';
+    }
+  } else {
+    const val = CATEGORIES[currentCat];
+    html += `<div class="section-header" id="${currentCat}"><h2>${val.label}</h2><p>${val.desc}</p></div>`;
+    html += '<div class="toolkit-grid">';
+    filtered.forEach(tk => { html += renderCard(tk); });
+    html += '</div>';
+  }
+
+  if (filtered.length === 0) {
+    html = '<div style="text-align:center;padding:4rem 2rem;color:var(--text-muted);">該当するツールキットがありません</div>';
+  }
+
+  main.innerHTML = html;
+}
+
+function renderCard(tk) {
+  const isExpanded = expandedId === tk.id;
+  const tierHtml = tk.tiers.map(t => `<span class="tk-tier ${t}">${TIER_LABELS[t]}</span>`).join(' ');
+
+  let detailHtml = '';
+  if (tk.detail) {
+    detailHtml = '<div class="tk-detail">';
+    if (tk.detail.howto) {
+      detailHtml += '<h4>実践手順</h4>';
+      detailHtml += tk.detail.howto.map(line => {
+        if (line === '') return '<br>';
+        if (line.startsWith('【')) return `<p><strong>${esc(line)}</strong></p>`;
+        return `<p>${esc(line)}</p>`;
+      }).join('');
+    }
+    if (tk.detail.application) {
+      detailHtml += `<h4>ミラツクでの活用</h4><p>${esc(tk.detail.application)}</p>`;
+    }
+    if (tk.detail.ref) {
+      detailHtml += `<div class="tk-ref">${esc(tk.detail.ref)}</div>`;
+    }
+    detailHtml += '</div>';
+  }
+
+  return `<div class="toolkit-card ${isExpanded ? 'expanded' : ''}" onclick="toggleCard('${tk.id}')">
+    <div class="tk-header">
+      <div class="tk-number">${tk.num}</div>
+      <div>
+        <div class="tk-title">${esc(tk.title)}</div>
+        <div class="tk-origin">${esc(tk.origin)}</div>
+      </div>
+    </div>
+    <div class="tk-desc">${esc(tk.desc)}</div>
+    <div class="tk-tags">
+      ${tk.tags.map(t => `<span class="tk-tag">${esc(t)}</span>`).join('')}
+      ${tierHtml}
+    </div>
+    ${detailHtml}
+    <div class="tk-toggle">${isExpanded ? '閉じる' : '詳細を見る'}</div>
+  </div>`;
+}
+
+function toggleCard(id) {
+  expandedId = expandedId === id ? null : id;
+  renderAll();
+}
+
+function filterCat(cat) {
+  currentCat = cat;
+  renderAll();
+}
+
+function filterPhase(phase) {
+  currentPhase = phase;
+  document.querySelectorAll('.phase-item').forEach(el => el.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  renderAll();
+}
+
+// Initial render
+renderAll();
+</script>
+</body>
+</html>
