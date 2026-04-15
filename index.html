@@ -153,6 +153,28 @@ body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,'Hirag
 .tier-2 { background: var(--tier2-bg); color: var(--tier2); }
 .tier-3 { background: var(--tier3-bg); color: var(--tier3); }
 .tk-toggle { font-size: .72rem; color: var(--accent); text-align: right; margin-top: .4rem; }
+.tk-card:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tk-card:focus:not(:focus-visible) { outline: none; }
+
+/* Filter result count */
+.filter-result-count { font-size: .82rem; color: var(--text-muted); padding: .5rem 0; }
+.filter-result-count strong { color: var(--accent); font-weight: 700; }
+.filter-clear { display: inline-block; margin-left: .75rem; font-size: .75rem; color: var(--accent); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.filter-clear:hover { opacity: .7; }
+
+/* Current season */
+.season-card.current { box-shadow: var(--shadow-md); border: 2px solid var(--accent); position: relative; }
+.season-card.current::after { content: '今の季節'; position: absolute; top: -.6rem; right: 1rem; background: var(--accent); color: #fff; font-size: .65rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
+
+/* Mobile hamburger */
+.mobile-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: .5rem; color: var(--accent); }
+.mobile-menu-btn svg { width: 22px; height: 22px; }
+@media (max-width: 768px) {
+  .mobile-menu-btn { display: block; }
+  .header-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--card); border-bottom: 1px solid var(--border); padding: 1rem 2rem; flex-direction: column; gap: .8rem; box-shadow: var(--shadow-md); z-index: 101; }
+  .header-nav.open { display: flex; }
+  .header-nav a { font-size: .88rem; padding: .4rem 0; }
+}
 
 /* === Guide Overlay === */
 .guide-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.4); backdrop-filter: blur(2px); }
@@ -247,6 +269,9 @@ body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,'Hirag
 <div class="header">
   <div class="header-inner">
     <div class="header-brand">MIRA TUKU <span>TOOLKIT</span></div>
+    <button class="mobile-menu-btn" onclick="document.querySelector('.header-nav').classList.toggle('open')" aria-label="メニューを開く">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
     <nav class="header-nav">
       <a href="#overview">概要</a>
       <a href="#structure">三層構造</a>
@@ -518,6 +543,8 @@ body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,'Hirag
     </select>
   </div>
 
+  <!-- Filter count -->
+  <div class="filter-result-count" id="filterCount"></div>
   <!-- Cards -->
   <div class="tk-grid" id="tkGrid"></div>
 </div>
@@ -1790,9 +1817,18 @@ function renderAll() {
     return;
   }
 
+  // Filter count
+  const countEl = document.getElementById('filterCount');
+  const hasFilter = currentCat !== 'all' || currentPhase !== 'all' || tierFilter || search;
+  if (hasFilter) {
+    countEl.innerHTML = `<strong>${filtered.length}</strong> / ${TOOLKITS.length} 件を表示中<span class="filter-clear" onclick="clearFilters()">フィルタをリセット</span>`;
+  } else {
+    countEl.innerHTML = '';
+  }
+
   grid.innerHTML = filtered.map(tk => {
     const tierHtml = tk.tiers.map(t => `<span class="tk-tier ${t}">${TIER_LABELS[t]}</span>`).join(' ');
-    return `<div class="tk-card" data-cat="${tk.cat}" onclick="openGuide('${tk.id}')">
+    return `<div class="tk-card" data-cat="${tk.cat}" onclick="openGuide('${tk.id}')" tabindex="0" role="button" onkeydown="if(event.key==='Enter'){openGuide('${tk.id}')}">
       <div class="tk-head"><div class="tk-num">${tk.num}</div><div><div class="tk-title">${esc(tk.title)}</div><div class="tk-origin">${esc(tk.origin)}</div></div></div>
       <div class="tk-desc">${esc(tk.desc)}</div>
       <div class="tk-meta">${tk.tags.map(t=>`<span class="tk-tag">${esc(t)}</span>`).join('')}${tierHtml}</div>
@@ -1940,8 +1976,22 @@ function filterPhase(p, el) {
   el.classList.add('active');
   renderAll();
 }
+function clearFilters() {
+  currentCat = 'all';
+  currentPhase = 'all';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('tierFilter').value = '';
+  document.querySelectorAll('.phase-step').forEach((e, i) => e.classList.toggle('active', i === 0));
+  renderAll();
+}
 
 renderAll();
+
+// Highlight current season
+const _m = new Date().getMonth() + 1;
+const _si = _m >= 4 && _m <= 6 ? 0 : _m >= 7 && _m <= 9 ? 1 : _m >= 10 && _m <= 12 ? 2 : 3;
+document.querySelectorAll('.season-card')[_si]?.classList.add('current');
+
 window.addEventListener('hashchange', handleHash);
 setTimeout(handleHash, 100);
 </script>
