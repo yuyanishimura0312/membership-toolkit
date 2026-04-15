@@ -152,15 +152,62 @@ body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,'Hirag
 .tier-1 { background: var(--tier1-bg); color: var(--tier1); }
 .tier-2 { background: var(--tier2-bg); color: var(--tier2); }
 .tier-3 { background: var(--tier3-bg); color: var(--tier3); }
-.tk-detail { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
-.tk-card.expanded .tk-detail { display: block; }
-.tk-detail h4 { font-size: .78rem; font-weight: 700; color: var(--accent); margin: .75rem 0 .4rem; }
-.tk-detail h4:first-child { margin-top: 0; }
-.tk-detail p, .tk-detail li { font-size: .82rem; line-height: 1.8; }
-.tk-detail ol, .tk-detail ul { padding-left: 1.2rem; margin-bottom: .4rem; }
-.tk-detail li { margin-bottom: .2rem; }
-.tk-ref { font-size: .72rem; color: var(--text-muted); font-style: italic; margin-top: .5rem; }
 .tk-toggle { font-size: .72rem; color: var(--accent); text-align: right; margin-top: .4rem; }
+
+/* === Guide Overlay === */
+.guide-overlay { display: none; position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.4); backdrop-filter: blur(2px); }
+.guide-overlay.active { display: flex; justify-content: center; align-items: flex-start; padding: 2rem; overflow-y: auto; }
+.guide-panel { background: var(--card); border-radius: var(--radius); max-width: 800px; width: 100%; margin: 2rem auto; box-shadow: 0 8px 32px rgba(0,0,0,.15); animation: guideIn .25s ease; }
+@keyframes guideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.guide-header { padding: 1.5rem 2rem 1rem; border-bottom: 1px solid var(--border); position: relative; }
+.guide-close { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); padding: .4rem; border-radius: 50%; transition: background .2s; }
+.guide-close:hover { background: var(--accent-bg); }
+.guide-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-size: .75rem; font-weight: 700; margin-right: .5rem; vertical-align: middle; }
+.guide-title { font-size: 1.2rem; font-weight: 800; line-height: 1.4; display: inline; vertical-align: middle; }
+.guide-origin { font-size: .8rem; color: var(--text-muted); margin-top: .3rem; }
+.guide-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: .75rem; }
+.guide-body { padding: 1.5rem 2rem 2rem; }
+
+/* Guide sections */
+.guide-section { margin-bottom: 1.5rem; }
+.guide-section:last-child { margin-bottom: 0; }
+.gs-label { font-size: .68rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .5rem; }
+.gs-desc { font-size: .9rem; line-height: 1.9; color: var(--text); margin-bottom: 1rem; }
+
+/* Step list */
+.guide-steps { list-style: none; padding: 0; counter-reset: gstep; }
+.guide-steps li { position: relative; padding: .6rem 0 .6rem 3rem; border-left: 2px solid var(--accent-bg); margin-left: .8rem; font-size: .85rem; line-height: 1.7; }
+.guide-steps li::before { counter-increment: gstep; content: counter(gstep); position: absolute; left: -13px; top: .5rem; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-size: .7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.guide-steps li.is-heading { font-weight: 700; color: var(--accent); border-left-color: var(--accent); padding-top: .8rem; }
+.guide-steps li.is-heading::before { background: var(--accent-soft); }
+.guide-steps li.is-blank { border-left-color: transparent; padding: .2rem 0 .2rem 3rem; }
+.guide-steps li.is-blank::before { display: none; }
+
+/* Application box */
+.guide-app { background: var(--accent-light); border-radius: var(--radius); padding: 1.2rem 1.4rem; border-left: 4px solid var(--accent); }
+.guide-app p { font-size: .85rem; line-height: 1.8; }
+
+/* Spec row */
+.guide-specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .75rem; margin: 1rem 0; }
+.guide-spec { background: var(--accent-bg); border-radius: var(--radius); padding: .6rem .8rem; text-align: center; }
+.guide-spec .spec-val { font-size: .95rem; font-weight: 700; color: var(--accent); }
+.guide-spec .spec-lbl { font-size: .68rem; color: var(--text-muted); }
+
+/* Reference */
+.guide-ref { font-size: .78rem; color: var(--text-muted); font-style: italic; padding-top: .75rem; border-top: 1px solid var(--border); }
+
+/* Nav buttons */
+.guide-nav { display: flex; justify-content: space-between; padding: 1rem 2rem; border-top: 1px solid var(--border); }
+.guide-nav button { background: none; border: 1px solid var(--border); border-radius: var(--radius); padding: .5rem 1rem; font-size: .78rem; cursor: pointer; color: var(--text-muted); transition: all .2s; }
+.guide-nav button:hover { border-color: var(--accent); color: var(--accent); }
+.guide-nav button:disabled { opacity: .3; cursor: default; }
+
+@media (max-width: 768px) {
+  .guide-overlay.active { padding: .5rem; }
+  .guide-panel { margin: .5rem; }
+  .guide-header, .guide-body { padding: 1rem 1.2rem; }
+  .guide-specs { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* === Stats row === */
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0; }
@@ -473,6 +520,11 @@ body { font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,'Hirag
 
   <!-- Cards -->
   <div class="tk-grid" id="tkGrid"></div>
+</div>
+
+<!-- Guide Overlay -->
+<div class="guide-overlay" id="guideOverlay" onclick="if(event.target===this)closeGuide()">
+  <div class="guide-panel" id="guidePanel"></div>
 </div>
 
 <div class="footer">
@@ -1739,30 +1791,148 @@ function renderAll() {
   }
 
   grid.innerHTML = filtered.map(tk => {
-    const isExp = expandedId === tk.id;
     const tierHtml = tk.tiers.map(t => `<span class="tk-tier ${t}">${TIER_LABELS[t]}</span>`).join(' ');
-    let detHtml = '';
-    if (tk.detail) {
-      detHtml = '<div class="tk-detail">';
-      if (tk.detail.howto) {
-        detHtml += '<h4>実践手順</h4>';
-        detHtml += tk.detail.howto.map(l => l===''?'<br>':l.startsWith('【')?`<p><strong>${esc(l)}</strong></p>`:`<p>${esc(l)}</p>`).join('');
-      }
-      if (tk.detail.application) detHtml += `<h4>ミラツクでの活用</h4><p>${esc(tk.detail.application)}</p>`;
-      if (tk.detail.ref) detHtml += `<div class="tk-ref">${esc(tk.detail.ref)}</div>`;
-      detHtml += '</div>';
-    }
-    return `<div class="tk-card ${isExp?'expanded':''}" data-cat="${tk.cat}" onclick="toggle('${tk.id}')">
+    return `<div class="tk-card" data-cat="${tk.cat}" onclick="openGuide('${tk.id}')">
       <div class="tk-head"><div class="tk-num">${tk.num}</div><div><div class="tk-title">${esc(tk.title)}</div><div class="tk-origin">${esc(tk.origin)}</div></div></div>
       <div class="tk-desc">${esc(tk.desc)}</div>
       <div class="tk-meta">${tk.tags.map(t=>`<span class="tk-tag">${esc(t)}</span>`).join('')}${tierHtml}</div>
-      ${detHtml}
-      <div class="tk-toggle">${isExp?'閉じる':'詳細を見る'}</div>
+      <div class="tk-toggle">ガイドを見る</div>
     </div>`;
   }).join('');
 }
 
-function toggle(id) { expandedId = expandedId===id?null:id; renderAll(); }
+// === Guide Overlay ===
+const CAT_LABELS = { community:'共同体構築', foresight:'フォーサイト', dialogue:'対話', commons:'知識コモンズ', engagement:'エンゲージメント' };
+const PHASE_LABELS = { onboarding:'参加・導入', inquiry:'探究サイクル', deepening:'深化・合宿', governance:'自治・運営', harvest:'収穫・統合' };
+
+function openGuide(id) {
+  const tk = TOOLKITS.find(t => t.id === id);
+  if (!tk) return;
+  const panel = document.getElementById('guidePanel');
+  const idx = TOOLKITS.indexOf(tk);
+  const prevTk = idx > 0 ? TOOLKITS[idx-1] : null;
+  const nextTk = idx < TOOLKITS.length-1 ? TOOLKITS[idx+1] : null;
+
+  const tierHtml = tk.tiers.map(t => `<span class="tk-tier ${t}">${TIER_LABELS[t]}</span>`).join(' ');
+  const tagHtml = tk.tags.map(t => `<span class="tk-tag">${esc(t)}</span>`).join('');
+
+  // Parse specs from howto (look for patterns like 【推奨人数】and 【所要時間】)
+  let people = '', time = '';
+  if (tk.detail && tk.detail.howto) {
+    tk.detail.howto.forEach(l => {
+      const pm = l.match(/推奨人数[】:：]\s*(.+?)(?:\s*【|$)/);
+      const tm = l.match(/所要時間[】:：]\s*(.+?)(?:\s*$)/);
+      if (pm) people = pm[1].trim();
+      if (tm) time = tm[1].trim();
+      // Also try combined format
+      const cm = l.match(/【推奨人数】(.+?)【所要時間】(.+)/);
+      if (cm) { people = cm[1].trim(); time = cm[2].trim(); }
+    });
+  }
+
+  // Build steps (separate headings, blank lines, and normal steps)
+  let stepsHtml = '';
+  if (tk.detail && tk.detail.howto) {
+    let stepCount = 0;
+    stepsHtml = '<ol class="guide-steps">';
+    tk.detail.howto.forEach(l => {
+      if (l === '') {
+        stepsHtml += '<li class="is-blank"></li>';
+      } else if (l.startsWith('【')) {
+        stepsHtml += `<li class="is-heading">${esc(l)}</li>`;
+      } else {
+        // Strip leading number+period if present
+        const cleaned = l.replace(/^\d+\.\s*/, '');
+        stepsHtml += `<li>${esc(cleaned)}</li>`;
+      }
+    });
+    stepsHtml += '</ol>';
+  }
+
+  let specsHtml = '';
+  if (people || time || tk.academic) {
+    specsHtml = '<div class="guide-specs">';
+    if (people) specsHtml += `<div class="guide-spec"><div class="spec-val">${esc(people)}</div><div class="spec-lbl">推奨人数</div></div>`;
+    if (time) specsHtml += `<div class="guide-spec"><div class="spec-val">${esc(time)}</div><div class="spec-lbl">所要時間</div></div>`;
+    specsHtml += `<div class="guide-spec"><div class="spec-val">${esc(CAT_LABELS[tk.cat]||tk.cat)}</div><div class="spec-lbl">カテゴリ</div></div>`;
+    specsHtml += `<div class="guide-spec"><div class="spec-val">${tk.academic?'あり':'--'}</div><div class="spec-lbl">学術的根拠</div></div>`;
+    specsHtml += '</div>';
+  }
+
+  panel.innerHTML = `
+    <div class="guide-header">
+      <button class="guide-close" onclick="closeGuide()" title="閉じる">&#10005;</button>
+      <div>
+        <span class="guide-num">${tk.num}</span>
+        <span class="guide-title">${esc(tk.title)}</span>
+      </div>
+      <div class="guide-origin">${esc(tk.origin)}</div>
+      <div class="guide-meta">${tagHtml}${tierHtml}</div>
+    </div>
+    <div class="guide-body">
+      <div class="guide-section">
+        <div class="gs-label">概要</div>
+        <div class="gs-desc">${esc(tk.desc)}</div>
+        ${specsHtml}
+      </div>
+
+      ${tk.detail && tk.detail.howto ? `
+      <div class="guide-section">
+        <div class="gs-label">実践ガイド</div>
+        ${stepsHtml}
+      </div>
+      ` : ''}
+
+      ${tk.detail && tk.detail.application ? `
+      <div class="guide-section">
+        <div class="gs-label">ミラツクでの活用方法</div>
+        <div class="guide-app"><p>${esc(tk.detail.application)}</p></div>
+      </div>
+      ` : ''}
+
+      ${tk.detail && tk.detail.ref ? `
+      <div class="guide-section">
+        <div class="guide-ref">${esc(tk.detail.ref)}</div>
+      </div>
+      ` : ''}
+    </div>
+    <div class="guide-nav">
+      <button ${prevTk ? `onclick="event.stopPropagation();openGuide('${prevTk.id}')"` : 'disabled'}>
+        ${prevTk ? '← ' + esc(prevTk.title.substring(0,20)) + (prevTk.title.length>20?'...':'') : '← 前'}
+      </button>
+      <button ${nextTk ? `onclick="event.stopPropagation();openGuide('${nextTk.id}')"` : 'disabled'}>
+        ${nextTk ? esc(nextTk.title.substring(0,20)) + (nextTk.title.length>20?'...':'') + ' →' : '次 →'}
+      </button>
+    </div>
+  `;
+
+  document.getElementById('guideOverlay').classList.add('active');
+  document.getElementById('guideOverlay').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  history.replaceState(null, '', '#guide/' + tk.id);
+}
+
+function closeGuide() {
+  document.getElementById('guideOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+  history.replaceState(null, '', '#toolkits');
+}
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('guideOverlay').classList.contains('active')) return;
+  if (e.key === 'Escape') closeGuide();
+});
+
+// Deep link support
+function handleHash() {
+  const h = location.hash.slice(1);
+  if (h.startsWith('guide/')) {
+    const id = h.slice(6);
+    if (TOOLKITS.find(t => t.id === id)) openGuide(id);
+  }
+}
+
 function filterCat(c) { currentCat = c; renderAll(); }
 function filterPhase(p, el) {
   currentPhase = p;
@@ -1772,6 +1942,8 @@ function filterPhase(p, el) {
 }
 
 renderAll();
+window.addEventListener('hashchange', handleHash);
+setTimeout(handleHash, 100);
 </script>
 </body>
 </html>
